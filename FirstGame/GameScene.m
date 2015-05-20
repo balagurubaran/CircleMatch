@@ -37,6 +37,12 @@ SKLabelNode     *currentTimeLbl;
 SKLabelNode     *avgTimeLbl;
 
 int             totalCirlce;
+SKShapeNode *gameEndBG;
+SKLabelNode *menuNode;
+SKLabelNode *replayNode;
+SKLabelNode *gameEndTxtNode;
+
+BOOL        isFirstTouch;
 
 @implementation GameScene
 
@@ -72,8 +78,8 @@ int             totalCirlce;
     backBtn.userData = [NSMutableDictionary dictionaryWithObject:@"backBtn" forKey:@"userData"];
     
     isSelectedNode = NO;
-    isGameEnded = YES;
-    
+    isGameEnded = NO;
+    isFirstTouch = YES;
    
     if(gameMode == BLACK_GREY_Mode)
         maxColor = 2;
@@ -92,6 +98,15 @@ int             totalCirlce;
     avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue];
     [allCirlceDetaiArray removeAllObjects];
     [self resetTheGame];
+    
+    gameEndBG = (SKShapeNode*)[self childNodeWithName:@"gameendbg"];
+    menuNode = (SKLabelNode*)[self childNodeWithName:@"menu"];
+    [menuNode setUserData:[NSMutableDictionary dictionaryWithObject:@"menu" forKey:@"userData"]];
+    replayNode = (SKLabelNode*)[self childNodeWithName:@"replay"];
+     [replayNode setUserData:[NSMutableDictionary dictionaryWithObject:@"replay" forKey:@"userData"]];
+    gameEndTxtNode = (SKLabelNode*)[self childNodeWithName:@"gameend"];
+    
+    [self gameEndScreen:NO];
 
 }
 
@@ -149,15 +164,11 @@ int             totalCirlce;
     
     [self addChild:eachCircle.circleSpriteNode];
     // [self shake:1000 node:shapeSprite];
-    
-
 }
 
 - (void) createCircle:(CGRect)circlePosition_size circleDetail:(CircleDetail*)cirDetail{
     
     [cirDetail.circleSpriteNode removeFromParent];
-   // cirDetail.circleSpriteNode = [SKShapeNode shapeNodeWithCircleOfRadius:cirDetail.circleSize/2];
-    //cirDetail.circleSpriteNode.position = CGPointMake(circlePosition_size.origin.x, circlePosition_size.origin.y);
     cirDetail.circleSpriteNode = [SKShapeNode node];
     cirDetail.circleSpriteNode.path = [UIBezierPath bezierPathWithOvalInRect:circlePosition_size].CGPath;
     
@@ -221,13 +232,13 @@ int             totalCirlce;
         SKShapeNode *node = (SKShapeNode*)[self nodeAtPoint:location];
         CircleDetail *selectedNodeCircle = [node.userData objectForKey:@"userData"];
         
-        if([selectedNodeCircle isKindOfClass:[CircleDetail class]]){
+        if([selectedNodeCircle isKindOfClass:[CircleDetail class]] && !isGameEnded){
             isSelectedNode = !isSelectedNode;
-            if(isGameEnded){
+            if(isFirstTouch){
                 startTime = [NSDate date];
             }
             
-            isGameEnded = NO;
+            isFirstTouch = NO;
             if(!isSelectedNode){
                 totalClick++;
                 if(selectedNodeCircle.circleID !=  previouslySelectedNodeCircle.circleID && selectedNodeCircle.circleColor ==  previouslySelectedNodeCircle.circleColor && selectedNodeCircle.circleSize ==  previouslySelectedNodeCircle.circleSize){
@@ -239,7 +250,9 @@ int             totalCirlce;
                         bestScoreLabel.text = [NSString stringWithFormat:@"%d",bestScore];
                     }
                 }else{
-                    [self resetTheGame];
+                    avgTimeValue += [endTime timeIntervalSinceDate:startTime]/totalClick;
+                    avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue];
+                    [self gameEndScreen:YES];
                 }
             }
             firstTouchTime = [NSDate date];
@@ -251,51 +264,47 @@ int             totalCirlce;
             node.glowWidth = 3.0f;
             node.antialiased = YES;
         }
-        else{
+        else if(isGameEnded){
             NSDictionary *userDataDic = node.userData;
             NSString *userData = [userDataDic objectForKey:@"userData"];
             if([userData isEqualToString:@"backBtn"]){
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"addMenuScene" object:nil];
             }
+            if([userData isEqualToString:@"menu"]){
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addMenuScene" object:nil];
+            }
+            if([userData isEqualToString:@"replay"]){
+                isGameEnded = NO;
+                isFirstTouch = YES;
+                [self gameEndScreen:NO];
+                [self resetTheGame];
+            }
+
         }
     }
 }
 
 - (void) resetTheGame{
     
-   /* 
-    gameMode = (arc4random() % 100) % 2;
-    if(gameMode == BLACK_GREY_Mode)
-        maxColor = 2;
-    else if(gameMode == RGB_MODE){
-        maxColor = 3;
-    }else{
-        maxColor = 4;
-    }
-    */
+    NSString *fileContent = [NSString stringWithFormat:@"%d,%f",bestScore,avgTimeValue];
+    [fileHandler writeFile:@"settings" fileContent:fileContent];
     
-    if(bestScore <= macthedCircleCount){
-        NSString *fileContent = [NSString stringWithFormat:@"%d,%f",bestScore,avgTimeValue];
-        [fileHandler writeFile:@"settings" fileContent:fileContent];
-    }
     isSelectedNode = NO;
     gameStatusCheckTimer.tolerance = 4;
     macthedCircleCount = 0;
     [self generateCircle:YES needToChangeValue:nil];
     scoreLabel.text = [NSString stringWithFormat:@"%d",macthedCircleCount];
     currentTimeLbl.text = @"0.0";
+
 }
 
 - (void) checkTheTimeInterVal{
     NSDate *secondTouchTime = [NSDate date];
     NSTimeInterval differnceBetweenTouch = [secondTouchTime timeIntervalSinceDate:firstTouchTime];
-    if(differnceBetweenTouch > 2 && !isGameEnded){
-        isGameEnded = YES;
+    if(differnceBetweenTouch > 1 && !isGameEnded){
         avgTimeValue += [endTime timeIntervalSinceDate:startTime]/totalClick;
-        avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue
-                           ];
-        
-       [self resetTheGame];
+        avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue];
+       [self gameEndScreen:YES];
     }
 }
 
@@ -307,8 +316,21 @@ int             totalCirlce;
         currentTimeLbl.text = [NSString stringWithFormat:@"%.1f",currentTimeValue];
         
     }
-    
-    
+}
+
+- (void) gameEndScreen:(BOOL)status{
+ 
+    if(!status){
+        [gameEndBG removeFromParent];
+        [menuNode removeFromParent];
+        [replayNode removeFromParent];
+        [gameEndTxtNode removeFromParent];
+    }else if(isGameEnded){
+        [self addChild:gameEndBG];
+        [self addChild:menuNode];
+        [self addChild:replayNode];
+        [self addChild:gameEndTxtNode];
+    }
 }
 
 - (void) findCountFromAll{

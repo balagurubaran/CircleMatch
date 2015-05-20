@@ -26,7 +26,7 @@ SKSpriteNode *vibgyorMode;
     
     vibgyorMode = (SKSpriteNode*)[self childNodeWithName:@"vibgyor"];
     vibgyorMode.userData = [NSMutableDictionary dictionaryWithObject:@"VIBGYORMode" forKey:@"userData"];
-    
+ 
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
