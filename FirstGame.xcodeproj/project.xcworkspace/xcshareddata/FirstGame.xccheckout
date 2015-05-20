@@ -7,39 +7,34 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>747A19D6-255E-4DF7-BA7E-E2E8CE63CA53</string>
 	<key>IDESourceControlProjectName</key>
-	<string>FirstGame</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>6c2bda1d-9b1b-0410-b811-9467803ddc01++1121</key>
-		<string>https://cap-subversion.baplc.com/svn/repos/CAP/mobile/iOS/BAFramework/trunk</string>
+		<key>C523FB79968F006F3B4CCFC8D7248CE25C9FA205</key>
+		<string>https://github.com/balagurubaran/CircleMatch.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FirstGame/FirstGame.xcodeproj</string>
+	<string>FirstGame.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>6c2bda1d-9b1b-0410-b811-9467803ddc01++1121</key>
-		<string>../../..</string>
-	</dict>
-	<key>IDESourceControlProjectRepositoryRootDictionary</key>
-	<dict>
-		<key>6c2bda1d-9b1b-0410-b811-9467803ddc01++1121</key>
-		<string>https://cap-subversion.baplc.com/svn/repos/CAP</string>
+		<key>C523FB79968F006F3B4CCFC8D7248CE25C9FA205</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://cap-subversion.baplc.com/svn/repos/CAP/mobile/iOS/BAFramework/trunk/FirstGame/FirstGame.xcodeproj</string>
+	<string>https://github.com/balagurubaran/CircleMatch.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6c2bda1d-9b1b-0410-b811-9467803ddc01++1121</string>
+	<string>C523FB79968F006F3B4CCFC8D7248CE25C9FA205</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.subversion</string>
+			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>6c2bda1d-9b1b-0410-b811-9467803ddc01++1121</string>
+			<string>C523FB79968F006F3B4CCFC8D7248CE25C9FA205</string>
 			<key>IDESourceControlWCCName</key>
-			<string>bala</string>
+			<string>CircleMatch</string>
 		</dict>
 	</array>
 </dict>

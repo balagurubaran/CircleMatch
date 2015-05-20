@@ -36,9 +36,13 @@ NSDate          *endTime;
 SKLabelNode     *currentTimeLbl;
 SKLabelNode     *avgTimeLbl;
 
+int             totalCirlce;
+
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
+    
+    totalCirlce = 36;
     
     fileHandler = [FileHandler fileHandlerSharedInstance];
     utility = [utiliz utilizSharedInstance];
@@ -75,7 +79,6 @@ SKLabelNode     *avgTimeLbl;
     }
     
     allCirlceDetaiArray = [[NSMutableArray alloc] init];
-    [self generateCircle:YES needToChangeValue:nil];
     gameStatusCheckTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkTheTimeInterVal) userInfo:nil repeats:YES];
     
     currentTimeLbl = (SKLabelNode*)[self childNodeWithName:@"currentTimer"];
@@ -90,120 +93,97 @@ SKLabelNode     *avgTimeLbl;
 - (void) generateCircle:(BOOL)initalLoad needToChangeValue:(NSArray*) circleIndex{
 
     if(initalLoad){
-        [allCirlceDetaiArray removeAllObjects];
+        //[allCirlceDetaiArray removeAllObjects];
         
-        for(int i = 0;i < 36 ; i++){
-            CircleDetail *eachCircle = [self randomCircle];
-            
+        for(int i = 0;i < totalCirlce ; i++){
+            CircleDetail *eachCircle;
+            if([allCirlceDetaiArray count] <= totalCirlce-1)
+                 eachCircle = [[CircleDetail alloc] init];
+            else{
+                eachCircle = allCirlceDetaiArray[i];
+            }
+            [self randomCircle:eachCircle];
             eachCircle.circleID = i;
             [allCirlceDetaiArray addObject:eachCircle];
+            [self updateCircleNodes:eachCircle];
         }
-        [self updateCircleNodes];
+        
     }else{
         for(int i = 0 ; i < [circleIndex count];i++){
-            CircleDetail *eachCircle = [self randomCircle];
-            eachCircle.circleID = [[circleIndex objectAtIndex:i] integerValue];
-            [allCirlceDetaiArray replaceObjectAtIndex:[[circleIndex objectAtIndex:i] integerValue] withObject:eachCircle];
-            [self updateCircleNodes];
+            CircleDetail *eachCircle = allCirlceDetaiArray[[[circleIndex objectAtIndex:i] integerValue]];
+            [self randomCircle:eachCircle];
+            
+           // [allCirlceDetaiArray replaceObjectAtIndex:[[circleIndex objectAtIndex:i] integerValue] withObject:eachCircle];
+            [self updateCircleNodes:eachCircle];
         }
     }
 }
 
-- (CircleDetail*) randomCircle{
-    CircleDetail *eachCircle = [[CircleDetail alloc] init];
+- (void) randomCircle:(CircleDetail*)eachCircle{
     
-    if((arc4random() % 100)%2 == 0){
+    if((arc4random() % 2) == 0){
         eachCircle.circleSize = 50;
     }else{
         eachCircle.circleSize = 75;
     }
-    
     int circleColor = arc4random() % maxColor;
     eachCircle.circleColor = circleColor;
+}
+
+- (void) updateCircleNodes:(CircleDetail*) eachCircle{
+  
+    int index = eachCircle.circleID;
+    int i = index/6;
+    int j = index%6;
+   
+    CGPoint cirlcePosition = CGPointMake((i * 120) + 95, (j * 120 + 210));
+    CGRect circleRect = CGRectMake(cirlcePosition.x - eachCircle.circleSize/2, cirlcePosition.y - eachCircle.circleSize/2, eachCircle.circleSize, eachCircle.circleSize);
     
-    return eachCircle;
+    [self createCircle:circleRect circleDetail:eachCircle];
+    NSMutableDictionary *eachNodeUserData = [[NSMutableDictionary alloc] init];
+    [eachNodeUserData setValue:eachCircle forKey:@"userData"];
+    eachCircle.circleSpriteNode.userData = eachNodeUserData;
+    
+    [self addChild:eachCircle.circleSpriteNode];
+    // [self shake:1000 node:shapeSprite];
+    
+
 }
 
-- (void) updateCircleNodes{
-    for(SKSpriteNode *eachSpriteNode in [self children]){
-        CircleDetail *selectedNodeCircle = [eachSpriteNode.userData objectForKey:@"userData"];
-        if([selectedNodeCircle isKindOfClass:[CircleDetail class]]){
-            [eachSpriteNode removeFromParent];
-        }
-    }
-    for(int i = 0 ; i < 6;i++){
-        for(int j = 0 ; j < 6;j++){
-            
-            CircleDetail *eachCircle = allCirlceDetaiArray[(i+j)+(i*5)];
-            CGPoint cirlcePosition = CGPointMake((i * 120) + 95, (j * 120 + 210));
-            CGRect circleRect = CGRectMake(cirlcePosition.x - eachCircle.circleSize/2, cirlcePosition.y - eachCircle.circleSize/2, eachCircle.circleSize, eachCircle.circleSize);
-            SKSpriteNode *sprite;
-            /*
-             
-             if(eachCircle.circleSize == 100){
-             if(eachCircle.circleColor == GREENCIRCLE){
-             sprite = [SKSpriteNode spriteNodeWithImageNamed:@"LightGreen50"];
-             }else{
-             sprite = [SKSpriteNode spriteNodeWithImageNamed:@"BlueCircle"];
-             }
-             
-             }else{
-             if(eachCircle.circleColor == GREENCIRCLE){
-             sprite = [SKSpriteNode spriteNodeWithImageNamed:@"LightGreen50"];
-             }else{
-             sprite = [SKSpriteNode spriteNodeWithImageNamed:@"BlueCircle"];
-             }
-             }
-             
-             sprite.position =
-             ;
-             NSMutableDictionary *eachNodeUserData = [[NSMutableDictionary alloc] init];
-             [eachNodeUserData setValue:eachCircle forKey:@"userdata"];
-             sprite.userData = eachNodeUserData;
-             */
-            SKShapeNode *shapeSprite = [self createCircle:circleRect circleDetail:eachCircle];
-            NSMutableDictionary *eachNodeUserData = [[NSMutableDictionary alloc] init];
-            [eachNodeUserData setValue:eachCircle forKey:@"userData"];
-            shapeSprite.userData = eachNodeUserData;
-            
-            [self addChild:shapeSprite];
-            [self shake:1000 node:shapeSprite];
-            
-        }
-    }
-}
-
-- (SKShapeNode*) createCircle:(CGRect)circlePosition_size circleDetail:(CircleDetail*)cirDetail{
-    SKShapeNode *node = [SKShapeNode node];
-    node.path = [UIBezierPath bezierPathWithOvalInRect:circlePosition_size].CGPath;
+- (void) createCircle:(CGRect)circlePosition_size circleDetail:(CircleDetail*)cirDetail{
+    
+    [cirDetail.circleSpriteNode removeFromParent];
+   // cirDetail.circleSpriteNode = [SKShapeNode shapeNodeWithCircleOfRadius:cirDetail.circleSize/2];
+    //cirDetail.circleSpriteNode.position = CGPointMake(circlePosition_size.origin.x, circlePosition_size.origin.y);
+    cirDetail.circleSpriteNode = [SKShapeNode node];
+    cirDetail.circleSpriteNode.path = [UIBezierPath bezierPathWithOvalInRect:circlePosition_size].CGPath;
     if(gameMode == BLACK_GREY_Mode){
         if(cirDetail.circleColor == GRAYCIRCLE)
-            node.fillColor = [UIColor grayColor];
+            cirDetail.circleSpriteNode.fillColor = [UIColor grayColor];
         else if(cirDetail.circleColor == BLACKCIRCLE)
-            node.fillColor = [UIColor blackColor];
+            cirDetail.circleSpriteNode.fillColor = [UIColor blackColor];
     }else if(gameMode == RGB_MODE){
         if(cirDetail.circleColor == GREENCIRCLE){
-            node.fillColor = [utiliz colorFromHexString:GREENHEX];
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:GREENHEX];
         }
         else if(cirDetail.circleColor == REDCIRCLE){
-            node.fillColor = [utiliz colorFromHexString:REDHEX];
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:REDHEX];
         }
         else if(cirDetail.circleColor == BLUECIRCLE){
-            node.fillColor = [utiliz colorFromHexString:BLUEHEX];
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:BLUEHEX];
         }
     }else{
         if(cirDetail.circleColor == PINKCIRCLE)
-            node.fillColor = [utiliz colorFromHexString:PINKHEX];
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:PINKHEX];
         else if(cirDetail.circleColor == GREENONECIRCLE)
-            node.fillColor = [utiliz colorFromHexString:GREENONEHEX];
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:GREENONEHEX];
         else if(cirDetail.circleColor == BLACKONECIRCLE)
-            node.fillColor = [UIColor blackColor];
+            cirDetail.circleSpriteNode.fillColor = [UIColor blackColor];
         else if(cirDetail.circleColor == GRAYONECIRCLE)
-            node.fillColor = [UIColor grayColor];
+            cirDetail.circleSpriteNode.fillColor = [UIColor grayColor];
     }
-    node.glowWidth = 1;
+   // cirDetail.circleSpriteNode.glowWidth = 1;
     
-    return node;
 }
 
 - (void) shake:(NSInteger)times node:(SKNode*)circleNode{
@@ -311,7 +291,7 @@ SKLabelNode     *avgTimeLbl;
         avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue
                            ];
         
-        [self resetTheGame];
+       [self resetTheGame];
     }
 }
 
