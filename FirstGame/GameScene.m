@@ -42,6 +42,11 @@ int             totalCirlce;
 
 -(void)didMoveToView:(SKView *)view {
     
+    
+    for(CircleDetail *node in allCirlceDetaiArray){
+        [node.circleSpriteNode removeFromParent];
+    }
+    
     totalCirlce = 36;
     
     fileHandler = [FileHandler fileHandlerSharedInstance];
@@ -85,7 +90,7 @@ int             totalCirlce;
     avgTimeLbl = (SKLabelNode*)[self childNodeWithName:@"avgTimer"];
     
     avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue];
-    
+    [allCirlceDetaiArray removeAllObjects];
     [self resetTheGame];
 
 }
@@ -93,8 +98,6 @@ int             totalCirlce;
 - (void) generateCircle:(BOOL)initalLoad needToChangeValue:(NSArray*) circleIndex{
 
     if(initalLoad){
-        //[allCirlceDetaiArray removeAllObjects];
-        
         for(int i = 0;i < totalCirlce ; i++){
             CircleDetail *eachCircle;
             if([allCirlceDetaiArray count] <= totalCirlce-1)
@@ -157,6 +160,7 @@ int             totalCirlce;
     //cirDetail.circleSpriteNode.position = CGPointMake(circlePosition_size.origin.x, circlePosition_size.origin.y);
     cirDetail.circleSpriteNode = [SKShapeNode node];
     cirDetail.circleSpriteNode.path = [UIBezierPath bezierPathWithOvalInRect:circlePosition_size].CGPath;
+    
     if(gameMode == BLACK_GREY_Mode){
         if(cirDetail.circleColor == GRAYCIRCLE)
             cirDetail.circleSpriteNode.fillColor = [UIColor grayColor];
