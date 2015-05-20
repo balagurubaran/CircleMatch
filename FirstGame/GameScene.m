@@ -42,7 +42,7 @@ SKLabelNode *menuNode;
 SKLabelNode *replayNode;
 SKLabelNode *gameEndTxtNode;
 
-BOOL        isFirstTouch;
+BOOL        isTabed;
 
 @implementation GameScene
 
@@ -79,7 +79,7 @@ BOOL        isFirstTouch;
     
     isSelectedNode = NO;
     isGameEnded = NO;
-    isFirstTouch = YES;
+    isTabed = NO;
    
     if(gameMode == BLACK_GREY_Mode)
         maxColor = 2;
@@ -234,11 +234,11 @@ BOOL        isFirstTouch;
         
         if([selectedNodeCircle isKindOfClass:[CircleDetail class]] && !isGameEnded){
             isSelectedNode = !isSelectedNode;
-            if(isFirstTouch){
+            if(!isTabed){
                 startTime = [NSDate date];
+                isTabed = YES;
             }
             
-            isFirstTouch = NO;
             if(!isSelectedNode){
                 totalClick++;
                 if(selectedNodeCircle.circleID !=  previouslySelectedNodeCircle.circleID && selectedNodeCircle.circleColor ==  previouslySelectedNodeCircle.circleColor && selectedNodeCircle.circleSize ==  previouslySelectedNodeCircle.circleSize){
@@ -252,6 +252,8 @@ BOOL        isFirstTouch;
                 }else{
                     avgTimeValue += [endTime timeIntervalSinceDate:startTime]/totalClick;
                     avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue];
+                    isGameEnded = YES;
+                    isTabed = NO;
                     [self gameEndScreen:YES];
                 }
             }
@@ -264,7 +266,7 @@ BOOL        isFirstTouch;
             node.glowWidth = 3.0f;
             node.antialiased = YES;
         }
-        else if(isGameEnded){
+        else if(isGameEnded && ![selectedNodeCircle isKindOfClass:[CircleDetail class]]){
             NSDictionary *userDataDic = node.userData;
             NSString *userData = [userDataDic objectForKey:@"userData"];
             if([userData isEqualToString:@"backBtn"]){
@@ -275,7 +277,6 @@ BOOL        isFirstTouch;
             }
             if([userData isEqualToString:@"replay"]){
                 isGameEnded = NO;
-                isFirstTouch = YES;
                 [self gameEndScreen:NO];
                 [self resetTheGame];
             }
@@ -301,16 +302,18 @@ BOOL        isFirstTouch;
 - (void) checkTheTimeInterVal{
     NSDate *secondTouchTime = [NSDate date];
     NSTimeInterval differnceBetweenTouch = [secondTouchTime timeIntervalSinceDate:firstTouchTime];
-    if(differnceBetweenTouch > 1 && !isGameEnded){
+    if(differnceBetweenTouch > 1 && isTabed){
         avgTimeValue += [endTime timeIntervalSinceDate:startTime]/totalClick;
         avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue];
+        isTabed = NO;
+        isGameEnded = YES;
        [self gameEndScreen:YES];
     }
 }
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
-    if(!isGameEnded){
+    if(isTabed){
         endTime = [NSDate date];
         currentTimeValue  = [endTime timeIntervalSinceDate:startTime];
         currentTimeLbl.text = [NSString stringWithFormat:@"%.1f",currentTimeValue];
