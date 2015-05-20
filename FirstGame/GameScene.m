@@ -66,9 +66,11 @@ BOOL        isTabed;
         NSArray  *storedDataAray = [storedData componentsSeparatedByString:@","];
         bestScore = [[storedDataAray objectAtIndex:0] integerValue];
         avgTimeValue = [[storedDataAray objectAtIndex:1] floatValue];
+        totalClick = [[storedDataAray objectAtIndex:2] floatValue];
     }else{
         bestScore = 0;
         avgTimeValue = 0.0;
+        totalClick = 0;
     }
     
     bestScoreLabel = (SKLabelNode*)[self childNodeWithName:@"bestScore"];
@@ -95,11 +97,12 @@ BOOL        isTabed;
     currentTimeLbl = (SKLabelNode*)[self childNodeWithName:@"currentTimer"];
     avgTimeLbl = (SKLabelNode*)[self childNodeWithName:@"avgTimer"];
     
-    avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue];
+    avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue/totalClick];
     [allCirlceDetaiArray removeAllObjects];
     [self resetTheGame];
     
     gameEndBG = (SKShapeNode*)[self childNodeWithName:@"gameendbg"];
+
     menuNode = (SKLabelNode*)[self childNodeWithName:@"menu"];
     [menuNode setUserData:[NSMutableDictionary dictionaryWithObject:@"menu" forKey:@"userData"]];
     replayNode = (SKLabelNode*)[self childNodeWithName:@"replay"];
@@ -250,8 +253,8 @@ BOOL        isTabed;
                         bestScoreLabel.text = [NSString stringWithFormat:@"%d",bestScore];
                     }
                 }else{
-                    avgTimeValue += [endTime timeIntervalSinceDate:startTime]/totalClick;
-                    avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue];
+                    avgTimeValue += [endTime timeIntervalSinceDate:startTime];
+                    avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue/totalClick];
                     isGameEnded = YES;
                     isTabed = NO;
                     [self gameEndScreen:YES];
@@ -266,14 +269,18 @@ BOOL        isTabed;
             node.glowWidth = 3.0f;
             node.antialiased = YES;
         }
-        else if(isGameEnded && ![selectedNodeCircle isKindOfClass:[CircleDetail class]]){
+        else if(![selectedNodeCircle isKindOfClass:[CircleDetail class]]){
             NSDictionary *userDataDic = node.userData;
             NSString *userData = [userDataDic objectForKey:@"userData"];
             if([userData isEqualToString:@"backBtn"]){
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"addMenuScene" object:nil];
+                [self writeFile];
+
             }
             if([userData isEqualToString:@"menu"]){
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"addMenuScene" object:nil];
+                [self writeFile];
+
             }
             if([userData isEqualToString:@"replay"]){
                 isGameEnded = NO;
@@ -286,9 +293,7 @@ BOOL        isTabed;
 }
 
 - (void) resetTheGame{
-    
-    NSString *fileContent = [NSString stringWithFormat:@"%d,%f",bestScore,avgTimeValue];
-    [fileHandler writeFile:@"settings" fileContent:fileContent];
+    [self writeFile];
     
     isSelectedNode = NO;
     gameStatusCheckTimer.tolerance = 4;
@@ -303,8 +308,8 @@ BOOL        isTabed;
     NSDate *secondTouchTime = [NSDate date];
     NSTimeInterval differnceBetweenTouch = [secondTouchTime timeIntervalSinceDate:firstTouchTime];
     if(differnceBetweenTouch > 1 && isTabed){
-        avgTimeValue += [endTime timeIntervalSinceDate:startTime]/totalClick;
-        avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue];
+        avgTimeValue += [endTime timeIntervalSinceDate:startTime];
+        avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue/totalClick];
         isTabed = NO;
         isGameEnded = YES;
        [self gameEndScreen:YES];
@@ -334,6 +339,11 @@ BOOL        isTabed;
         [self addChild:replayNode];
         [self addChild:gameEndTxtNode];
     }
+}
+
+- (void) writeFile{
+    NSString *fileContent = [NSString stringWithFormat:@"%d,%f,%d",bestScore,avgTimeValue,totalClick];
+    [fileHandler writeFile:@"settings" fileContent:fileContent];
 }
 
 - (void) findCountFromAll{

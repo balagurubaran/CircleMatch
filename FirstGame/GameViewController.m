@@ -9,10 +9,11 @@
 #import "GameViewController.h"
 #import "GameScene.h"
 #import "MenuScene.h"
+#import "AdmobViewController.h"
 
 GameScene *scene;
 MenuScene *menuScene;
-
+AdmobViewController *adsController;
 SKView * skView;
 
 @implementation SKScene (Unarchive)
@@ -66,7 +67,8 @@ SKView * skView;
                                              selector:@selector(addMenuScene)
                                                  name:@"addMenuScene"
                                                object:nil];
-    
+    adsController = [AdmobViewController singleton];
+    [adsController resetAdView:self];
     
 }
 
