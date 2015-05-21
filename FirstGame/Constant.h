@@ -16,18 +16,23 @@
 #define GREENCIRCLE 1
 #define BLUECIRCLE  2
 
-#define PINKCIRCLE      0
-#define GREENONECIRCLE  1
-#define BLACKONECIRCLE  2
-#define GRAYONECIRCLE   3
+#define ORANGECIRCLE    3
+#define YELLOWCIRCLE    4
+#define INDIGOCIRCLE    5
+#define VIOLETCIRCLE    6
+
+#define RGBMAXPLAY      50
+#define BLACKMAXPLAY      50
 
 
-#define PINKHEX     @"#FFD3E0"
-#define GREENONEHEX @"#5AD427"
+#define ORANGEHEX     @"#FF8F62"
+#define YELLOWHEX     @"#FDFC73"
+#define INDIGOHEX     @"#CB76FE"
+#define VIOLETHEX     @"#8B35CB"
 
-#define GREENHEX    @"#4CD964"
-#define BLUEHEX     @"#5856D6"
-#define REDHEX      @"#FF3A2D"
+#define GREENHEX    @"#7BC86F"
+#define BLUEHEX     @"#45A2E0"
+#define REDHEX      @"#DB6D62"
 
 #define BLACK_GREY_Mode  0
 #define RGB_MODE         1
@@ -35,6 +40,12 @@
 
 int gameMode;
 int maxColor;
+
+int
+bestScore;
+int         blackAndGreyPlayCount;
+int         RGBPlayCount;
+
 
 int     totalClick;
 NSTimeInterval   avgTimeValue;

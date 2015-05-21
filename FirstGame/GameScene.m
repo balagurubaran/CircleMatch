@@ -23,7 +23,7 @@ int             macthedCircleCount;
 SKLabelNode     *scoreLabel;
 SKLabelNode     *bestScoreLabel;
 
-int             bestScore;
+
 
 FileHandler     *fileHandler;
 utiliz          *utility;
@@ -44,6 +44,9 @@ SKLabelNode *gameEndTxtNode;
 
 BOOL        isTabed;
 
+
+
+
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
@@ -60,18 +63,7 @@ BOOL        isTabed;
     /* Setup your scene here */
     scoreLabel = (SKLabelNode*)[self childNodeWithName:@"score"];
    
-    NSString *storedData = [fileHandler readFile:@"settings"];
     
-    if ([storedData length] > 0) {
-        NSArray  *storedDataAray = [storedData componentsSeparatedByString:@","];
-        bestScore = [[storedDataAray objectAtIndex:0] integerValue];
-        avgTimeValue = [[storedDataAray objectAtIndex:1] floatValue];
-        totalClick = [[storedDataAray objectAtIndex:2] floatValue];
-    }else{
-        bestScore = 0;
-        avgTimeValue = 0.0;
-        totalClick = 0;
-    }
     
     bestScoreLabel = (SKLabelNode*)[self childNodeWithName:@"bestScore"];
     bestScoreLabel.text = [NSString stringWithFormat:@"%d",bestScore];
@@ -83,12 +75,12 @@ BOOL        isTabed;
     isGameEnded = NO;
     isTabed = NO;
    
-    if(gameMode == BLACK_GREY_Mode)
+    if(gameMode == BLACK_GREY_Mode){
         maxColor = 2;
-    else if(gameMode == RGB_MODE){
+    }else if(gameMode == RGB_MODE){
         maxColor = 3;
     }else{
-        maxColor = 4;
+        maxColor = 7;
     }
     
     allCirlceDetaiArray = [[NSMutableArray alloc] init];
@@ -99,18 +91,18 @@ BOOL        isTabed;
     
     avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue/totalClick];
     [allCirlceDetaiArray removeAllObjects];
-    [self resetTheGame];
+    
     
     gameEndBG = (SKShapeNode*)[self childNodeWithName:@"gameendbg"];
 
     menuNode = (SKLabelNode*)[self childNodeWithName:@"menu"];
     [menuNode setUserData:[NSMutableDictionary dictionaryWithObject:@"menu" forKey:@"userData"]];
     replayNode = (SKLabelNode*)[self childNodeWithName:@"replay"];
-     [replayNode setUserData:[NSMutableDictionary dictionaryWithObject:@"replay" forKey:@"userData"]];
+    [replayNode setUserData:[NSMutableDictionary dictionaryWithObject:@"replay" forKey:@"userData"]];
     gameEndTxtNode = (SKLabelNode*)[self childNodeWithName:@"gameend"];
     
+    [self resetTheGame];
     [self gameEndScreen:NO];
-
 }
 
 - (void) generateCircle:(BOOL)initalLoad needToChangeValue:(NSArray*) circleIndex{
@@ -143,7 +135,8 @@ BOOL        isTabed;
 - (void) randomCircle:(CircleDetail*)eachCircle{
     
     if((arc4random() % 2) == 0){
-        eachCircle.circleSize = 50;
+        eachCircle.circleSize = 60
+        ;
     }else{
         eachCircle.circleSize = 75;
     }
@@ -191,14 +184,24 @@ BOOL        isTabed;
             cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:BLUEHEX];
         }
     }else{
-        if(cirDetail.circleColor == PINKCIRCLE)
-            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:PINKHEX];
-        else if(cirDetail.circleColor == GREENONECIRCLE)
-            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:GREENONEHEX];
-        else if(cirDetail.circleColor == BLACKONECIRCLE)
-            cirDetail.circleSpriteNode.fillColor = [UIColor blackColor];
-        else if(cirDetail.circleColor == GRAYONECIRCLE)
-            cirDetail.circleSpriteNode.fillColor = [UIColor grayColor];
+        if(cirDetail.circleColor == GREENCIRCLE){
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:GREENHEX];
+        }
+        else if(cirDetail.circleColor == REDCIRCLE){
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:REDHEX];
+        }
+        else if(cirDetail.circleColor == BLUECIRCLE){
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:BLUEHEX];
+        }
+        
+        if(cirDetail.circleColor == ORANGECIRCLE)
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:ORANGEHEX];
+        else if(cirDetail.circleColor == YELLOWCIRCLE)
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:YELLOWHEX];
+        else if(cirDetail.circleColor == INDIGOCIRCLE)
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:INDIGOHEX];
+        else if(cirDetail.circleColor == VIOLETCIRCLE)
+            cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:VIOLETHEX];
     }
    // cirDetail.circleSpriteNode.glowWidth = 1;
     
@@ -233,6 +236,7 @@ BOOL        isTabed;
         //SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
         
         SKShapeNode *node = (SKShapeNode*)[self nodeAtPoint:location];
+        
         CircleDetail *selectedNodeCircle = [node.userData objectForKey:@"userData"];
         
         if([selectedNodeCircle isKindOfClass:[CircleDetail class]] && !isGameEnded){
@@ -293,6 +297,13 @@ BOOL        isTabed;
 }
 
 - (void) resetTheGame{
+    
+    if(gameMode == BLACK_GREY_Mode){
+        blackAndGreyPlayCount++;
+    }else if(gameMode == RGB_MODE){
+        RGBPlayCount++;
+    }
+    
     [self writeFile];
     
     isSelectedNode = NO;
@@ -342,7 +353,7 @@ BOOL        isTabed;
 }
 
 - (void) writeFile{
-    NSString *fileContent = [NSString stringWithFormat:@"%d,%f,%d",bestScore,avgTimeValue,totalClick];
+    NSString *fileContent = [NSString stringWithFormat:@"%d,%f,%d,%d,%d",bestScore,avgTimeValue,totalClick,blackAndGreyPlayCount,RGBPlayCount];
     [fileHandler writeFile:@"settings" fileContent:fileContent];
 }
 

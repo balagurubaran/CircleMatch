@@ -8,7 +8,7 @@
 
 #import "MenuScene.h"
 #import "Constant.h"
-
+#import "FileHandler.h"
 
 
 SKSpriteNode *blackMode;
@@ -27,12 +27,29 @@ SKSpriteNode *vibgyorMode;
     vibgyorMode = (SKSpriteNode*)[self childNodeWithName:@"vibgyor"];
     vibgyorMode.userData = [NSMutableDictionary dictionaryWithObject:@"VIBGYORMode" forKey:@"userData"];
  
+    FileHandler *fileHandler = [FileHandler fileHandlerSharedInstance];
+    NSString *storedData = [fileHandler readFile:@"settings"];
+    
+    
+    if ([storedData length] > 0) {
+        NSArray  *storedDataAray = [storedData componentsSeparatedByString:@","];
+        bestScore = [[storedDataAray objectAtIndex:0] intValue];
+        avgTimeValue = [[storedDataAray objectAtIndex:1] floatValue];
+        totalClick = [[storedDataAray objectAtIndex:2] floatValue];
+        blackAndGreyPlayCount = [[storedDataAray objectAtIndex:3] intValue];
+        RGBPlayCount = [[storedDataAray objectAtIndex:4] intValue];
+    }else{
+        blackAndGreyPlayCount = 0;
+        RGBPlayCount = 0;
+        bestScore = 0;
+        avgTimeValue = 0.0;
+        totalClick = 0;
+    }
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
-    
-    
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         SKShapeNode *node = (SKShapeNode*)[self nodeAtPoint:location];
@@ -43,11 +60,21 @@ SKSpriteNode *vibgyorMode;
             gameMode = BLACK_GREY_Mode;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameScene" object:nil];
         }if([userData isEqualToString:@"RGBMode"]){
-            gameMode = RGB_MODE;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameScene" object:nil];
+            if(blackAndGreyPlayCount > BLACKMAXPLAY){
+                gameMode = RGB_MODE;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameScene" object:nil];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" message:[NSString stringWithFormat:@"Play %d times Black & Grey mode to unlock the RGB Game mode",BLACKMAXPLAY-blackAndGreyPlayCount] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+            }
         }if([userData isEqualToString:@"VIBGYORMode"]){
-            gameMode = VIBGYOR_MODE;
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameScene" object:nil];
+            if(blackAndGreyPlayCount > BLACKMAXPLAY){
+                gameMode = VIBGYOR_MODE;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameScene" object:nil];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" message:[NSString stringWithFormat:@"Play %d times RGB mode to unlock the VIBGYOR Game mode",RGBMAXPLAY-RGBPlayCount] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alert show];
+            }
         }
  
     }

@@ -59,6 +59,8 @@
 }
 
 -(void)resetAdView:(UIViewController *)rootViewController {
+    return;
+    
     // Always keep track of currentDelegate for notification forwarding
     currentDelegate_ = rootViewController;
     
