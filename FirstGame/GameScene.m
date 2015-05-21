@@ -264,7 +264,7 @@ BOOL        isTabed;
             previouslySelectedNodeCircle = selectedNodeCircle;
             
             
-            node.strokeColor = [SKColor grayColor];
+            node.strokeColor = [self reverseColorOf:node.fillColor];//[SKColor purpleColor];
             node.lineWidth = 3.0f;
             node.glowWidth = 3.0f;
             node.antialiased = YES;
@@ -344,6 +344,44 @@ BOOL        isTabed;
 - (void) writeFile{
     NSString *fileContent = [NSString stringWithFormat:@"%d,%f,%d",bestScore,avgTimeValue,totalClick];
     [fileHandler writeFile:@"settings" fileContent:fileContent];
+}
+
+-(UIColor *)reverseColorOf :(UIColor *)oldColor
+{
+    CGColorRef oldCGColor = oldColor.CGColor;
+    
+    int numberOfComponents = CGColorGetNumberOfComponents(oldCGColor);
+    // can not invert - the only component is the alpha
+    if (numberOfComponents == 1) {
+        return [UIColor colorWithCGColor:oldCGColor];
+    }
+    
+    const CGFloat *oldComponentColors = CGColorGetComponents(oldCGColor);
+    CGFloat newComponentColors[numberOfComponents];
+    
+    int i = numberOfComponents - 1;
+    newComponentColors[i] = oldComponentColors[i]; // alpha
+    while (--i >= 0) {
+        newComponentColors[i] = 1 - oldComponentColors[i];
+    }
+    
+    CGColorRef newCGColor = CGColorCreate(CGColorGetColorSpace(oldCGColor), newComponentColors);
+    UIColor *newColor = [UIColor colorWithCGColor:newCGColor];
+    CGColorRelease(newCGColor);
+    
+    //=====For the GRAY colors 'Middle level colors'
+    CGFloat white = 0;
+    [oldColor getWhite:&white alpha:nil];
+    
+    if(white>0.3 && white < 0.67)
+    {
+        if(white >= 0.5)
+            newColor = [UIColor darkGrayColor];
+        else if (white < 0.5)
+            newColor = [UIColor blackColor];
+        
+    }
+    return newColor;
 }
 
 - (void) findCountFromAll{
