@@ -10,6 +10,13 @@
 		780664051B0D021300E13B33 /* AdmobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780664041B0D021300E13B33 /* AdmobViewController.m */; };
 		780664281B0D021D00E13B33 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 780664261B0D021D00E13B33 /* libGoogleAdMobAds.a */; };
 		780664291B0D021D00E13B33 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 780664271B0D021D00E13B33 /* README.txt */; };
+		78AAB9CB1B0EC8F40038287A /* CircleMatchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */; };
+		78AAB9CC1B0EC8F40038287A /* CircleMatchBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */; };
+		78EB25FB1B0ECA9D00CEFFB4 /* CreditScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 78EB25F81B0ECA9D00CEFFB4 /* CreditScene.sks */; };
+		78EB25FC1B0ECA9D00CEFFB4 /* CreditsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EB25FA1B0ECA9D00CEFFB4 /* CreditsScene.m */; };
+		78EB25FE1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 78EB25FD1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png */; };
+		78EB26001B0ECDE500CEFFB4 /* HelpScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 78EB25FF1B0ECDE500CEFFB4 /* HelpScene.sks */; };
+		78EB26031B0ECE5600CEFFB4 /* HelpScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EB26021B0ECE5600CEFFB4 /* HelpScene.m */; };
 		DD92C6041B0379550022F40A /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = DD92C6031B0379550022F40A /* MenuScene.sks */; };
 		DD92C6071B0379710022F40A /* MenuScene.m in Sources */ = {isa = PBXBuildFile; fileRef = DD92C6061B0379710022F40A /* MenuScene.m */; };
 		DDA8B3241AEF5D8900466E05 /* FileHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DDA8B3231AEF5D8900466E05 /* FileHandler.m */; };
@@ -68,6 +75,15 @@
 		780664251B0D021D00E13B33 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		780664261B0D021D00E13B33 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		780664271B0D021D00E13B33 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleMatchBG.png; sourceTree = "<group>"; };
+		78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CircleMatchBG@2x.png"; sourceTree = "<group>"; };
+		78EB25F81B0ECA9D00CEFFB4 /* CreditScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditScene.sks; sourceTree = "<group>"; };
+		78EB25F91B0ECA9D00CEFFB4 /* CreditsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsScene.h; sourceTree = "<group>"; };
+		78EB25FA1B0ECA9D00CEFFB4 /* CreditsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsScene.m; sourceTree = "<group>"; };
+		78EB25FD1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleMatch_emptyBG.png; sourceTree = "<group>"; };
+		78EB25FF1B0ECDE500CEFFB4 /* HelpScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HelpScene.sks; sourceTree = "<group>"; };
+		78EB26011B0ECE5600CEFFB4 /* HelpScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpScene.h; sourceTree = "<group>"; };
+		78EB26021B0ECE5600CEFFB4 /* HelpScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HelpScene.m; sourceTree = "<group>"; };
 		DD726CB21AEA39C200F4930D /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constant.h; sourceTree = "<group>"; };
 		DD92C6031B0379550022F40A /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
 		DD92C6051B0379710022F40A /* MenuScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuScene.h; sourceTree = "<group>"; };
@@ -183,6 +199,16 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		78AAB9C81B0EC8F40038287A /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				78EB25FD1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png */,
+				78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */,
+				78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		F50105521AE65E6900F73093 = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +230,7 @@
 		F501055D1AE65E6900F73093 /* FirstGame */ = {
 			isa = PBXGroup;
 			children = (
+				78AAB9C81B0EC8F40038287A /* Images */,
 				780664061B0D021D00E13B33 /* GoogleMobileAdsSdkiOS-6.12.2 */,
 				F50105621AE65E6900F73093 /* AppDelegate.h */,
 				F50105631AE65E6900F73093 /* AppDelegate.m */,
@@ -217,6 +244,12 @@
 				DD92C6031B0379550022F40A /* MenuScene.sks */,
 				DD92C6051B0379710022F40A /* MenuScene.h */,
 				DD92C6061B0379710022F40A /* MenuScene.m */,
+				78EB25F81B0ECA9D00CEFFB4 /* CreditScene.sks */,
+				78EB25F91B0ECA9D00CEFFB4 /* CreditsScene.h */,
+				78EB25FA1B0ECA9D00CEFFB4 /* CreditsScene.m */,
+				78EB25FF1B0ECDE500CEFFB4 /* HelpScene.sks */,
+				78EB26011B0ECE5600CEFFB4 /* HelpScene.h */,
+				78EB26021B0ECE5600CEFFB4 /* HelpScene.m */,
 				F501056A1AE65E6900F73093 /* GameViewController.h */,
 				F501056B1AE65E6900F73093 /* GameViewController.m */,
 				DD726CB21AEA39C200F4930D /* Constant.h */,
@@ -339,9 +372,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				78EB26001B0ECDE500CEFFB4 /* HelpScene.sks in Resources */,
 				F50105741AE65E6900F73093 /* LaunchScreen.xib in Resources */,
+				78AAB9CC1B0EC8F40038287A /* CircleMatchBG@2x.png in Resources */,
+				78AAB9CB1B0EC8F40038287A /* CircleMatchBG.png in Resources */,
 				F50105711AE65E6900F73093 /* Images.xcassets in Resources */,
+				78EB25FB1B0ECA9D00CEFFB4 /* CreditScene.sks in Resources */,
 				F50105691AE65E6900F73093 /* GameScene.sks in Resources */,
+				78EB25FE1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png in Resources */,
 				DD92C6041B0379550022F40A /* MenuScene.sks in Resources */,
 				780664291B0D021D00E13B33 /* README.txt in Resources */,
 				F501056F1AE65E6900F73093 /* Main.storyboard in Resources */,
@@ -369,8 +407,10 @@
 				F501058D1AE6685200F73093 /* CircleDetail.m in Sources */,
 				DDA8B3241AEF5D8900466E05 /* FileHandler.m in Sources */,
 				F50105641AE65E6900F73093 /* AppDelegate.m in Sources */,
+				78EB25FC1B0ECA9D00CEFFB4 /* CreditsScene.m in Sources */,
 				F50105671AE65E6900F73093 /* GameScene.m in Sources */,
 				F50105611AE65E6900F73093 /* main.m in Sources */,
+				78EB26031B0ECE5600CEFFB4 /* HelpScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

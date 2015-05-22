@@ -277,13 +277,13 @@ BOOL        isTabed;
             NSDictionary *userDataDic = node.userData;
             NSString *userData = [userDataDic objectForKey:@"userData"];
             if([userData isEqualToString:@"backBtn"]){
+                                [self writeFile];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"addMenuScene" object:nil];
-                [self writeFile];
 
             }
             if([userData isEqualToString:@"menu"]){
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"addMenuScene" object:nil];
                 [self writeFile];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"addMenuScene" object:nil];
 
             }
             if([userData isEqualToString:@"replay"]){

@@ -9,11 +9,31 @@
 #import "MenuScene.h"
 #import "Constant.h"
 #import "FileHandler.h"
-
+#import "CreditsScene.h"
 
 SKSpriteNode *blackMode;
 SKSpriteNode *RGBMode;
 SKSpriteNode *vibgyorMode;
+SKSpriteNode *creditsScene;
+
+@implementation SKScene (Unarchive)
+
++ (instancetype)unarchiveFromFile:(NSString *)file {
+    /* Retrieve scene file path from the application bundle */
+    NSString *nodePath = [[NSBundle mainBundle] pathForResource:file ofType:@"sks"];
+    /* Unarchive the file to an SKScene object */
+    NSData *data = [NSData dataWithContentsOfFile:nodePath
+                                          options:NSDataReadingMappedIfSafe
+                                            error:nil];
+    NSKeyedUnarchiver *arch = [[NSKeyedUnarchiver alloc] initForReadingWithData:data];
+    [arch setClass:self forClassName:@"SKScene"];
+    SKScene *scene = [arch decodeObjectForKey:NSKeyedArchiveRootObjectKey];
+    [arch finishDecoding];
+    
+    return scene;
+}
+
+@end
 
 @implementation MenuScene
 
@@ -27,6 +47,12 @@ SKSpriteNode *vibgyorMode;
     vibgyorMode = (SKSpriteNode*)[self childNodeWithName:@"vibgyor"];
     vibgyorMode.userData = [NSMutableDictionary dictionaryWithObject:@"VIBGYORMode" forKey:@"userData"];
  
+    creditsScene = (SKSpriteNode*)[self childNodeWithName:@"credits"];
+    creditsScene.userData = [NSMutableDictionary dictionaryWithObject:@"credits" forKey:@"userData"];
+    
+    SKSpriteNode *helpScene = (SKSpriteNode*)[self childNodeWithName:@"help"];
+    helpScene.userData = [NSMutableDictionary dictionaryWithObject:@"help" forKey:@"userData"];
+    
     FileHandler *fileHandler = [FileHandler fileHandlerSharedInstance];
     NSString *storedData = [fileHandler readFile:@"settings"];
     
@@ -59,7 +85,7 @@ SKSpriteNode *vibgyorMode;
         if([userData isEqualToString:@"blackmode"]){
             gameMode = BLACK_GREY_Mode;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameScene" object:nil];
-        }if([userData isEqualToString:@"RGBMode"]){
+        }else if([userData isEqualToString:@"RGBMode"]){
             if(blackAndGreyPlayCount > BLACKMAXPLAY){
                 gameMode = RGB_MODE;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameScene" object:nil];
@@ -67,7 +93,7 @@ SKSpriteNode *vibgyorMode;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" message:[NSString stringWithFormat:@"Play %d times Black & Grey mode to unlock the RGB Game mode",BLACKMAXPLAY-blackAndGreyPlayCount] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
             }
-        }if([userData isEqualToString:@"VIBGYORMode"]){
+        }else if([userData isEqualToString:@"VIBGYORMode"]){
             if(blackAndGreyPlayCount > BLACKMAXPLAY){
                 gameMode = VIBGYOR_MODE;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameScene" object:nil];
@@ -75,6 +101,14 @@ SKSpriteNode *vibgyorMode;
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Info" message:[NSString stringWithFormat:@"Play %d times RGB mode to unlock the VIBGYOR Game mode",RGBMAXPLAY-RGBPlayCount] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alert show];
             }
+        }else if([userData isEqualToString:@"credits"]){
+            CreditsScene *CS = [CreditsScene unarchiveFromFile:@"CreditScene"];
+            CS.scaleMode = SKSceneScaleModeFill;
+            [self.view presentScene:CS];
+        }else if([userData isEqualToString:@"help"]){
+            CreditsScene *help = [CreditsScene unarchiveFromFile:@"HelpScene"];
+            help.scaleMode = SKSceneScaleModeFill;
+            [self.view presentScene:help];
         }
  
     }
