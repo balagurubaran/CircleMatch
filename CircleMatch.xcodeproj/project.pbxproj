@@ -92,7 +92,7 @@
 		DDA8B3231AEF5D8900466E05 /* FileHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileHandler.m; sourceTree = "<group>"; };
 		DDA8B3251AEF814500466E05 /* utiliz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utiliz.h; sourceTree = "<group>"; };
 		DDA8B3261AEF814500466E05 /* utiliz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utiliz.m; sourceTree = "<group>"; };
-		F501055B1AE65E6900F73093 /* FirstGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirstGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F501055B1AE65E6900F73093 /* CircleMatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CircleMatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F501055F1AE65E6900F73093 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F50105601AE65E6900F73093 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F50105621AE65E6900F73093 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		F501056E1AE65E6900F73093 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F50105701AE65E6900F73093 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F50105731AE65E6900F73093 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		F50105791AE65E6900F73093 /* FirstGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FirstGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F50105791AE65E6900F73093 /* CircleMatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CircleMatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F501057E1AE65E6900F73093 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F501057F1AE65E6900F73093 /* FirstGameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstGameTests.m; sourceTree = "<group>"; };
 		F501058B1AE6685200F73093 /* CircleDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleDetail.h; sourceTree = "<group>"; };
@@ -221,8 +221,8 @@
 		F501055C1AE65E6900F73093 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F501055B1AE65E6900F73093 /* FirstGame.app */,
-				F50105791AE65E6900F73093 /* FirstGameTests.xctest */,
+				F501055B1AE65E6900F73093 /* CircleMatch.app */,
+				F50105791AE65E6900F73093 /* CircleMatchTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -294,9 +294,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F501055A1AE65E6900F73093 /* FirstGame */ = {
+		F501055A1AE65E6900F73093 /* CircleMatch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F50105831AE65E6900F73093 /* Build configuration list for PBXNativeTarget "FirstGame" */;
+			buildConfigurationList = F50105831AE65E6900F73093 /* Build configuration list for PBXNativeTarget "CircleMatch" */;
 			buildPhases = (
 				F50105571AE65E6900F73093 /* Sources */,
 				F50105581AE65E6900F73093 /* Frameworks */,
@@ -306,14 +306,14 @@
 			);
 			dependencies = (
 			);
-			name = FirstGame;
+			name = CircleMatch;
 			productName = FirstGame;
-			productReference = F501055B1AE65E6900F73093 /* FirstGame.app */;
+			productReference = F501055B1AE65E6900F73093 /* CircleMatch.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F50105781AE65E6900F73093 /* FirstGameTests */ = {
+		F50105781AE65E6900F73093 /* CircleMatchTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F50105861AE65E6900F73093 /* Build configuration list for PBXNativeTarget "FirstGameTests" */;
+			buildConfigurationList = F50105861AE65E6900F73093 /* Build configuration list for PBXNativeTarget "CircleMatchTests" */;
 			buildPhases = (
 				F50105751AE65E6900F73093 /* Sources */,
 				F50105761AE65E6900F73093 /* Frameworks */,
@@ -324,9 +324,9 @@
 			dependencies = (
 				F501057B1AE65E6900F73093 /* PBXTargetDependency */,
 			);
-			name = FirstGameTests;
+			name = CircleMatchTests;
 			productName = FirstGameTests;
-			productReference = F50105791AE65E6900F73093 /* FirstGameTests.xctest */;
+			productReference = F50105791AE65E6900F73093 /* CircleMatchTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -348,7 +348,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F50105561AE65E6900F73093 /* Build configuration list for PBXProject "FirstGame" */;
+			buildConfigurationList = F50105561AE65E6900F73093 /* Build configuration list for PBXProject "CircleMatch" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -361,8 +361,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F501055A1AE65E6900F73093 /* FirstGame */,
-				F50105781AE65E6900F73093 /* FirstGameTests */,
+				F501055A1AE65E6900F73093 /* CircleMatch */,
+				F50105781AE65E6900F73093 /* CircleMatchTests */,
 			);
 		};
 /* End PBXProject section */
@@ -427,7 +427,7 @@
 /* Begin PBXTargetDependency section */
 		F501057B1AE65E6900F73093 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F501055A1AE65E6900F73093 /* FirstGame */;
+			target = F501055A1AE65E6900F73093 /* CircleMatch */;
 			targetProxy = F501057A1AE65E6900F73093 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -544,7 +544,7 @@
 					"$(PROJECT_DIR)/FirstGame/GoogleMobileAdsSdkiOS-6.12.2",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CircleMatch;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -563,7 +563,7 @@
 					"$(PROJECT_DIR)/FirstGame/GoogleMobileAdsSdkiOS-6.12.2",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CircleMatch;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -582,7 +582,7 @@
 				);
 				INFOPLIST_FILE = FirstGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CircleMatchTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirstGame.app/FirstGame";
 			};
 			name = Debug;
@@ -597,7 +597,7 @@
 				);
 				INFOPLIST_FILE = FirstGameTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = CircleMatchTests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FirstGame.app/FirstGame";
 			};
 			name = Release;
@@ -605,7 +605,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F50105561AE65E6900F73093 /* Build configuration list for PBXProject "FirstGame" */ = {
+		F50105561AE65E6900F73093 /* Build configuration list for PBXProject "CircleMatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F50105811AE65E6900F73093 /* Debug */,
@@ -614,7 +614,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F50105831AE65E6900F73093 /* Build configuration list for PBXNativeTarget "FirstGame" */ = {
+		F50105831AE65E6900F73093 /* Build configuration list for PBXNativeTarget "CircleMatch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F50105841AE65E6900F73093 /* Debug */,
@@ -623,7 +623,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F50105861AE65E6900F73093 /* Build configuration list for PBXNativeTarget "FirstGameTests" */ = {
+		F50105861AE65E6900F73093 /* Build configuration list for PBXNativeTarget "CircleMatchTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F50105871AE65E6900F73093 /* Debug */,
