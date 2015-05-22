@@ -147,8 +147,9 @@ BOOL        isTabed;
 - (void) updateCircleNodes:(CircleDetail*) eachCircle{
   
     int index = eachCircle.circleID;
-    int i = index/6;
-    int j = index%6;
+    int sqrt = sqrtl(totalCirlce);
+    int i = index/sqrt;
+    int j = index%sqrt;
    
     CGPoint cirlcePosition = CGPointMake((i * 120) + 95, (j * 120 + 210));
     CGRect circleRect = CGRectMake(cirlcePosition.x - eachCircle.circleSize/2, cirlcePosition.y - eachCircle.circleSize/2, eachCircle.circleSize, eachCircle.circleSize);
