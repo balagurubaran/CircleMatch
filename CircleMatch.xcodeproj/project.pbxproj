@@ -10,6 +10,7 @@
 		780664051B0D021300E13B33 /* AdmobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780664041B0D021300E13B33 /* AdmobViewController.m */; };
 		780664281B0D021D00E13B33 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 780664261B0D021D00E13B33 /* libGoogleAdMobAds.a */; };
 		780664291B0D021D00E13B33 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 780664271B0D021D00E13B33 /* README.txt */; };
+		788DEF821B12B89C0045FFBD /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 788DEF811B12B89C0045FFBD /* click.mp3 */; };
 		78AAB9CB1B0EC8F40038287A /* CircleMatchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */; };
 		78AAB9CC1B0EC8F40038287A /* CircleMatchBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */; };
 		78EB25FB1B0ECA9D00CEFFB4 /* CreditScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 78EB25F81B0ECA9D00CEFFB4 /* CreditScene.sks */; };
@@ -75,6 +76,7 @@
 		780664251B0D021D00E13B33 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		780664261B0D021D00E13B33 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		780664271B0D021D00E13B33 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		788DEF811B12B89C0045FFBD /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
 		78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleMatchBG.png; sourceTree = "<group>"; };
 		78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CircleMatchBG@2x.png"; sourceTree = "<group>"; };
 		78EB25F81B0ECA9D00CEFFB4 /* CreditScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditScene.sks; sourceTree = "<group>"; };
@@ -199,6 +201,14 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
+		788DEF801B12B89C0045FFBD /* Sound */ = {
+			isa = PBXGroup;
+			children = (
+				788DEF811B12B89C0045FFBD /* click.mp3 */,
+			);
+			path = Sound;
+			sourceTree = "<group>";
+		};
 		78AAB9C81B0EC8F40038287A /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -230,6 +240,7 @@
 		F501055D1AE65E6900F73093 /* FirstGame */ = {
 			isa = PBXGroup;
 			children = (
+				788DEF801B12B89C0045FFBD /* Sound */,
 				78AAB9C81B0EC8F40038287A /* Images */,
 				780664061B0D021D00E13B33 /* GoogleMobileAdsSdkiOS-6.12.2 */,
 				F50105621AE65E6900F73093 /* AppDelegate.h */,
@@ -381,6 +392,7 @@
 				F50105691AE65E6900F73093 /* GameScene.sks in Resources */,
 				78EB25FE1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png in Resources */,
 				DD92C6041B0379550022F40A /* MenuScene.sks in Resources */,
+				788DEF821B12B89C0045FFBD /* click.mp3 in Resources */,
 				780664291B0D021D00E13B33 /* README.txt in Resources */,
 				F501056F1AE65E6900F73093 /* Main.storyboard in Resources */,
 			);

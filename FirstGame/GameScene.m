@@ -12,6 +12,9 @@
 #import "Constant.h"
 #import "FileHandler.h"
 #import "utiliz.h"
+#import <Foundation/Foundation.h>
+
+@import AVFoundation;
 
 NSMutableArray  *allCirlceDetaiArray;
 BOOL            isSelectedNode;
@@ -45,7 +48,7 @@ SKLabelNode *gameEndTxtNode;
 
 BOOL        isTabed;
 
-
+AVAudioPlayer *clickPlayer;
 
 
 @implementation GameScene
@@ -85,7 +88,7 @@ BOOL        isTabed;
     }
     
     allCirlceDetaiArray = [[NSMutableArray alloc] init];
-    gameStatusCheckTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkTheTimeInterVal) userInfo:nil repeats:YES];
+    gameStatusCheckTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(checkTheTimeInterVal) userInfo:nil repeats:YES];
     
     currentTimeLbl = (SKLabelNode*)[self childNodeWithName:@"currentTimer"];
     avgTimeLbl = (SKLabelNode*)[self childNodeWithName:@"avgTimer"];
@@ -105,11 +108,14 @@ BOOL        isTabed;
     
     selectedIdentifyNode = [SKShapeNode shapeNodeWithCircleOfRadius:20];
     selectedIdentifyNode.fillColor = [UIColor blackColor];
-//    [self addChild:selectedIdentifyNode];
+    //[self addChild:selectedIdentifyNode];
     
     [self resetTheGame];
     [self gameEndScreen:NO];
     
+    NSURL *musicURL = [[NSBundle mainBundle] URLForResource:@"click" withExtension:@"mp3"];
+    clickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
+    [clickPlayer prepareToPlay];
 }
 
 - (void) generateCircle:(BOOL)initalLoad needToChangeValue:(NSArray*) circleIndex{
@@ -248,6 +254,7 @@ BOOL        isTabed;
         CircleDetail *selectedNodeCircle = [node.userData objectForKey:@"userData"];
         
         if([selectedNodeCircle isKindOfClass:[CircleDetail class]] && !isGameEnded){
+            [clickPlayer play];
             isSelectedNode = !isSelectedNode;
             if(!isTabed){
                 startTime = [NSDate date];
@@ -341,7 +348,7 @@ BOOL        isTabed;
 - (void) checkTheTimeInterVal{
     NSDate *secondTouchTime = [NSDate date];
     NSTimeInterval differnceBetweenTouch = [secondTouchTime timeIntervalSinceDate:firstTouchTime];
-    if(differnceBetweenTouch > 1 && isTabed){
+    if(differnceBetweenTouch > .5 && isTabed){
         avgTimeValue += [endTime timeIntervalSinceDate:startTime];
         avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue/totalClick];
         isTabed = NO;
