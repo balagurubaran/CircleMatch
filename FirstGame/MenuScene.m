@@ -94,7 +94,7 @@ SKSpriteNode *creditsScene;
                 [alert show];
             }
         }else if([userData isEqualToString:@"VIBGYORMode"]){
-            if(blackAndGreyPlayCount > BLACKMAXPLAY){
+            if(RGBPlayCount > RGBMAXPLAY){
                 gameMode = VIBGYOR_MODE;
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameScene" object:nil];
             }else{

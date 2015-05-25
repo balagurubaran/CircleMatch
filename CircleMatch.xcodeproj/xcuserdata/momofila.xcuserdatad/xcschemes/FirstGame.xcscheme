@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F501055A1AE65E6900F73093"
-            BuildableName = "FirstGame.app"
-            BlueprintName = "FirstGame"
-            ReferencedContainer = "container:FirstGame.xcodeproj">
+            BuildableName = "CircleMatch.app"
+            BlueprintName = "CircleMatch"
+            ReferencedContainer = "container:CircleMatch.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -77,9 +77,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F501055A1AE65E6900F73093"
-            BuildableName = "FirstGame.app"
-            BlueprintName = "FirstGame"
-            ReferencedContainer = "container:FirstGame.xcodeproj">
+            BuildableName = "CircleMatch.app"
+            BlueprintName = "CircleMatch"
+            ReferencedContainer = "container:CircleMatch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>

@@ -23,6 +23,7 @@ int             macthedCircleCount;
 SKLabelNode     *scoreLabel;
 SKLabelNode     *bestScoreLabel;
 
+SKShapeNode     *selectedIdentifyNode;
 
 
 FileHandler     *fileHandler;
@@ -101,8 +102,14 @@ BOOL        isTabed;
     [replayNode setUserData:[NSMutableDictionary dictionaryWithObject:@"replay" forKey:@"userData"]];
     gameEndTxtNode = (SKLabelNode*)[self childNodeWithName:@"gameend"];
     
+    
+    selectedIdentifyNode = [SKShapeNode shapeNodeWithCircleOfRadius:20];
+    selectedIdentifyNode.fillColor = [UIColor blackColor];
+//    [self addChild:selectedIdentifyNode];
+    
     [self resetTheGame];
     [self gameEndScreen:NO];
+    
 }
 
 - (void) generateCircle:(BOOL)initalLoad needToChangeValue:(NSArray*) circleIndex{
@@ -248,6 +255,8 @@ BOOL        isTabed;
             }
             
             if(!isSelectedNode){
+               // selectedIdentifyNode.hidden = YES;
+                [selectedIdentifyNode removeFromParent];
                 totalClick++;
                 if(selectedNodeCircle.circleID !=  previouslySelectedNodeCircle.circleID && selectedNodeCircle.circleColor ==  previouslySelectedNodeCircle.circleColor && selectedNodeCircle.circleSize ==  previouslySelectedNodeCircle.circleSize){
                     macthedCircleCount++;
@@ -264,15 +273,28 @@ BOOL        isTabed;
                     isTabed = NO;
                     [self gameEndScreen:YES];
                 }
+                
+            }else{
+                [self addChild:selectedIdentifyNode];
+                int index = selectedNodeCircle.circleID;
+                int sqrt = sqrtl(totalCirlce);
+                int i = index/sqrt;
+                int j = index%sqrt;
+                
+                CGPoint cirlcePosition = CGPointMake((i * 120) + 95, (j * 120 + 210));
+                
+                selectedIdentifyNode.position = cirlcePosition;
             }
+            
             firstTouchTime = [NSDate date];
             previouslySelectedNodeCircle = selectedNodeCircle;
             
-            
-            node.strokeColor = [self reverseColorOf:node.fillColor];//[SKColor purpleColor];
+           
+            /*node.strokeColor = [self reverseColorOf:node.fillColor];//[SKColor purpleColor];
             node.lineWidth = 3.0f;
             node.glowWidth = 3.0f;
             node.antialiased = YES;
+             */
         }
         else if(![selectedNodeCircle isKindOfClass:[CircleDetail class]]){
             NSDictionary *userDataDic = node.userData;
@@ -313,7 +335,7 @@ BOOL        isTabed;
     [self generateCircle:YES needToChangeValue:nil];
     scoreLabel.text = [NSString stringWithFormat:@"%d",macthedCircleCount];
     currentTimeLbl.text = @"0.0";
-
+    [selectedIdentifyNode removeFromParent];
 }
 
 - (void) checkTheTimeInterVal{
@@ -339,18 +361,15 @@ BOOL        isTabed;
 }
 
 - (void) gameEndScreen:(BOOL)status{
- 
-    if(!status){
-        [gameEndBG removeFromParent];
-        [menuNode removeFromParent];
-        [replayNode removeFromParent];
-        [gameEndTxtNode removeFromParent];
-    }else if(isGameEnded){
-        [self addChild:gameEndBG];
-        [self addChild:menuNode];
-        [self addChild:replayNode];
-        [self addChild:gameEndTxtNode];
-    }
+    gameEndBG.zPosition = status?1:-10;
+    menuNode.zPosition = status?1:-10;
+    replayNode.zPosition = status?1:-10;
+    gameEndTxtNode.zPosition = status?1:-10;
+    
+    gameEndBG.hidden = !status;
+    menuNode.hidden  = !status;
+    replayNode.hidden = !status;
+    gameEndTxtNode.hidden = !status;
 }
 
 - (void) writeFile{
