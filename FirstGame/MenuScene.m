@@ -10,6 +10,7 @@
 #import "Constant.h"
 #import "FileHandler.h"
 #import "CreditsScene.h"
+#import "HelpScene.h"
 
 SKSpriteNode *blackMode;
 SKSpriteNode *RGBMode;
@@ -106,7 +107,7 @@ SKSpriteNode *creditsScene;
             CS.scaleMode = SKSceneScaleModeFill;
             [self.view presentScene:CS];
         }else if([userData isEqualToString:@"help"]){
-            CreditsScene *help = [CreditsScene unarchiveFromFile:@"HelpScene"];
+            HelpScene *help = [HelpScene unarchiveFromFile:@"HelpScene"];
             help.scaleMode = SKSceneScaleModeFill;
             [self.view presentScene:help];
         }
