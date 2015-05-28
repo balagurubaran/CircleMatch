@@ -22,7 +22,7 @@
 #define VIOLETCIRCLE    6
 
 #define RGBMAXPLAY      50
-#define BLACKMAXPLAY      50
+#define BLACKMAXPLAY    50
 
 
 #define ORANGEHEX     @"#FF8F62"

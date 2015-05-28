@@ -10,9 +10,11 @@
 		780664051B0D021300E13B33 /* AdmobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780664041B0D021300E13B33 /* AdmobViewController.m */; };
 		780664281B0D021D00E13B33 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 780664261B0D021D00E13B33 /* libGoogleAdMobAds.a */; };
 		780664291B0D021D00E13B33 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 780664271B0D021D00E13B33 /* README.txt */; };
+		7829A2C31B15BC9900222378 /* wrong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7829A2C21B15BC9900222378 /* wrong.wav */; };
 		788DEF821B12B89C0045FFBD /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 788DEF811B12B89C0045FFBD /* click.mp3 */; };
 		78AAB9CB1B0EC8F40038287A /* CircleMatchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */; };
 		78AAB9CC1B0EC8F40038287A /* CircleMatchBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */; };
+		78D4B9021B14B7EA0018F508 /* GameCenterClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D4B9011B14B7EA0018F508 /* GameCenterClass.m */; };
 		78EB25FB1B0ECA9D00CEFFB4 /* CreditScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 78EB25F81B0ECA9D00CEFFB4 /* CreditScene.sks */; };
 		78EB25FC1B0ECA9D00CEFFB4 /* CreditsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EB25FA1B0ECA9D00CEFFB4 /* CreditsScene.m */; };
 		78EB25FE1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 78EB25FD1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png */; };
@@ -76,9 +78,12 @@
 		780664251B0D021D00E13B33 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		780664261B0D021D00E13B33 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		780664271B0D021D00E13B33 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		7829A2C21B15BC9900222378 /* wrong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong.wav; sourceTree = "<group>"; };
 		788DEF811B12B89C0045FFBD /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
 		78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleMatchBG.png; sourceTree = "<group>"; };
 		78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CircleMatchBG@2x.png"; sourceTree = "<group>"; };
+		78D4B9001B14B7EA0018F508 /* GameCenterClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterClass.h; sourceTree = "<group>"; };
+		78D4B9011B14B7EA0018F508 /* GameCenterClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterClass.m; sourceTree = "<group>"; };
 		78EB25F81B0ECA9D00CEFFB4 /* CreditScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditScene.sks; sourceTree = "<group>"; };
 		78EB25F91B0ECA9D00CEFFB4 /* CreditsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsScene.h; sourceTree = "<group>"; };
 		78EB25FA1B0ECA9D00CEFFB4 /* CreditsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsScene.m; sourceTree = "<group>"; };
@@ -204,6 +209,7 @@
 		788DEF801B12B89C0045FFBD /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				7829A2C21B15BC9900222378 /* wrong.wav */,
 				788DEF811B12B89C0045FFBD /* click.mp3 */,
 			);
 			path = Sound;
@@ -268,6 +274,8 @@
 				DDA8B3261AEF814500466E05 /* utiliz.m */,
 				780664031B0D021300E13B33 /* AdmobViewController.h */,
 				780664041B0D021300E13B33 /* AdmobViewController.m */,
+				78D4B9001B14B7EA0018F508 /* GameCenterClass.h */,
+				78D4B9011B14B7EA0018F508 /* GameCenterClass.m */,
 				F501056D1AE65E6900F73093 /* Main.storyboard */,
 				F50105701AE65E6900F73093 /* Images.xcassets */,
 				F50105721AE65E6900F73093 /* LaunchScreen.xib */,
@@ -388,6 +396,7 @@
 				78AAB9CC1B0EC8F40038287A /* CircleMatchBG@2x.png in Resources */,
 				78AAB9CB1B0EC8F40038287A /* CircleMatchBG.png in Resources */,
 				F50105711AE65E6900F73093 /* Images.xcassets in Resources */,
+				7829A2C31B15BC9900222378 /* wrong.wav in Resources */,
 				78EB25FB1B0ECA9D00CEFFB4 /* CreditScene.sks in Resources */,
 				F50105691AE65E6900F73093 /* GameScene.sks in Resources */,
 				78EB25FE1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png in Resources */,
@@ -421,6 +430,7 @@
 				F50105641AE65E6900F73093 /* AppDelegate.m in Sources */,
 				78EB25FC1B0ECA9D00CEFFB4 /* CreditsScene.m in Sources */,
 				F50105671AE65E6900F73093 /* GameScene.m in Sources */,
+				78D4B9021B14B7EA0018F508 /* GameCenterClass.m in Sources */,
 				F50105611AE65E6900F73093 /* main.m in Sources */,
 				78EB26031B0ECE5600CEFFB4 /* HelpScene.m in Sources */,
 			);

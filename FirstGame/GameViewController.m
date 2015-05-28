@@ -10,7 +10,9 @@
 #import "GameScene.h"
 #import "MenuScene.h"
 #import "AdmobViewController.h"
+#import "GameCenterClass.h"
 
+@import GameKit;
 GameScene *scene;
 MenuScene *menuScene;
 AdmobViewController *adsController;
@@ -43,8 +45,8 @@ SKView * skView;
 
     // Configure the view.
     skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
+   // skView.showsFPS = YES;
+    //skView.showsNodeCount = YES;
     /* Sprite Kit applies additional optimizations to improve rendering performance */
     skView.ignoresSiblingOrder = YES;
     
@@ -67,9 +69,13 @@ SKView * skView;
                                              selector:@selector(addMenuScene)
                                                  name:@"addMenuScene"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loadLeaderBoard)
+                                                 name:@"loadLeaderBoard"
+                                               object:nil];
+    
     adsController = [AdmobViewController singleton];
     [adsController resetAdView:self];
-    
 }
 
 - (void) addGameScene{
@@ -80,6 +86,25 @@ SKView * skView;
     [skView presentScene:menuScene];
 }
 
+- (void)loadLeaderBoard{
+    
+    [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
+        NSLog(@"error:%@:",[error description]);
+        if(error == nil){
+            GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
+            if (gameCenterController != nil)
+            {
+                gameCenterController.gameCenterDelegate = self;
+                gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
+                gameCenterController.leaderboardIdentifier = @"leaderboardIdentifier";
+                [self presentViewController: gameCenterController animated: YES completion:nil];
+            }
+        }
+    }];
+}
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController{
+    [gameCenterViewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 - (BOOL)shouldAutorotate
 {

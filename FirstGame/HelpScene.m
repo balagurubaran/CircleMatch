@@ -12,7 +12,7 @@
 @implementation HelpScene
 
 -(void)didMoveToView:(SKView *)view {
-    [self multiLine:@"Pair same colour, same size cirlce with in the time frame"];
+    //[self multiLine:@"Pair same colour, same size cirlce with in the time frame"];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FirstGame/GameScene.m"
-            timestampString = "454215182.637834"
+            timestampString = "454409464.293017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
             landmarkName = "-touchesBegan:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
@@ -35,13 +35,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FirstGame/MenuScene.m"
-            timestampString = "454220072.454872"
+            filePath = "FirstGame/GameScene.m"
+            timestampString = "454409464.293017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "-didMoveToView:"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
+            landmarkName = "-resetTheGame"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FirstGame/MenuScene.m"
+            timestampString = "454411622.903785"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "-touchesBegan:withEvent:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

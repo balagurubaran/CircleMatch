@@ -54,6 +54,9 @@ SKSpriteNode *creditsScene;
     SKSpriteNode *helpScene = (SKSpriteNode*)[self childNodeWithName:@"help"];
     helpScene.userData = [NSMutableDictionary dictionaryWithObject:@"help" forKey:@"userData"];
     
+    SKSpriteNode *leadeBoardScene = (SKSpriteNode*)[self childNodeWithName:@"leaderboard"];
+    leadeBoardScene.userData = [NSMutableDictionary dictionaryWithObject:@"leaderboard" forKey:@"userData"];
+    
     FileHandler *fileHandler = [FileHandler fileHandlerSharedInstance];
     NSString *storedData = [fileHandler readFile:@"settings"];
     
@@ -110,6 +113,8 @@ SKSpriteNode *creditsScene;
             HelpScene *help = [HelpScene unarchiveFromFile:@"HelpScene"];
             help.scaleMode = SKSceneScaleModeFill;
             [self.view presentScene:help];
+        }else if([userData isEqualToString:@"leaderboard"]){
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"loadLeaderBoard" object:nil];
         }
  
     }

@@ -13,5 +13,5 @@
 
 + (utiliz*) utilizSharedInstance;
 + (UIColor *)colorFromHexString:(NSString *)hexString;
-
++ (UIColor *)reverseColorOf :(UIColor *)oldColor;
 @end

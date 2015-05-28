@@ -12,6 +12,8 @@
 #import "Constant.h"
 #import "FileHandler.h"
 #import "utiliz.h"
+#import "GameCenterClass.h"
+
 #import <Foundation/Foundation.h>
 
 @import AVFoundation;
@@ -45,11 +47,13 @@ SKShapeNode *gameEndBG;
 SKLabelNode *menuNode;
 SKLabelNode *replayNode;
 SKLabelNode *gameEndTxtNode;
+SKLabelNode *LeaderBoard;
 
 BOOL        isTabed;
 
 AVAudioPlayer *clickPlayer;
-
+AVAudioPlayer *wrongClickPlayer;
+GameCenterClass *GCenter;
 
 @implementation GameScene
 
@@ -105,6 +109,8 @@ AVAudioPlayer *clickPlayer;
     [replayNode setUserData:[NSMutableDictionary dictionaryWithObject:@"replay" forKey:@"userData"]];
     gameEndTxtNode = (SKLabelNode*)[self childNodeWithName:@"gameend"];
     
+    LeaderBoard = (SKLabelNode*)[self childNodeWithName:@"leaderboard"];
+    [LeaderBoard setUserData:[NSMutableDictionary dictionaryWithObject:@"leaderboard" forKey:@"userData"]];
     
     selectedIdentifyNode = [SKShapeNode shapeNodeWithCircleOfRadius:20];
     selectedIdentifyNode.fillColor = [UIColor blackColor];
@@ -116,6 +122,12 @@ AVAudioPlayer *clickPlayer;
     NSURL *musicURL = [[NSBundle mainBundle] URLForResource:@"click" withExtension:@"mp3"];
     clickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
     [clickPlayer prepareToPlay];
+   
+    musicURL = [[NSBundle mainBundle] URLForResource:@"wrong" withExtension:@"wav"];
+    wrongClickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
+    [wrongClickPlayer prepareToPlay];
+    
+     GCenter = [GameCenterClass gameCenterSharedInstance];
 }
 
 - (void) generateCircle:(BOOL)initalLoad needToChangeValue:(NSArray*) circleIndex{
@@ -148,10 +160,10 @@ AVAudioPlayer *clickPlayer;
 - (void) randomCircle:(CircleDetail*)eachCircle{
     
     if((arc4random() % 2) == 0){
-        eachCircle.circleSize = 60
+        eachCircle.circleSize = 70
         ;
     }else{
-        eachCircle.circleSize = 75;
+        eachCircle.circleSize = 85;
     }
     int circleColor = arc4random() % maxColor;
     eachCircle.circleColor = circleColor;
@@ -243,7 +255,6 @@ AVAudioPlayer *clickPlayer;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-    
     for (UITouch *touch in touches) {
         CGPoint location = [touch locationInNode:self];
         
@@ -274,6 +285,7 @@ AVAudioPlayer *clickPlayer;
                         bestScoreLabel.text = [NSString stringWithFormat:@"%d",bestScore];
                     }
                 }else{
+                    [wrongClickPlayer play];
                     avgTimeValue += [endTime timeIntervalSinceDate:startTime];
                     avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue/totalClick];
                     isGameEnded = YES;
@@ -313,6 +325,7 @@ AVAudioPlayer *clickPlayer;
             }
             if([userData isEqualToString:@"menu"]){
                 [self writeFile];
+                [self resetTheGame];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"addMenuScene" object:nil];
 
             }
@@ -320,6 +333,9 @@ AVAudioPlayer *clickPlayer;
                 isGameEnded = NO;
                 [self gameEndScreen:NO];
                 [self resetTheGame];
+            }else if([userData isEqualToString:@"leaderboard"]){
+                [self resetTheGame];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"loadLeaderBoard" object:nil];
             }
 
         }
@@ -335,6 +351,9 @@ AVAudioPlayer *clickPlayer;
     }
     
     [self writeFile];
+    if(macthedCircleCount >= bestScore){
+        [GCenter postScore:bestScore];
+    }
     
     isSelectedNode = NO;
     gameStatusCheckTimer.tolerance = 4;
@@ -343,17 +362,19 @@ AVAudioPlayer *clickPlayer;
     scoreLabel.text = [NSString stringWithFormat:@"%d",macthedCircleCount];
     currentTimeLbl.text = @"0.0";
     [selectedIdentifyNode removeFromParent];
-}
+    
+   }
 
 - (void) checkTheTimeInterVal{
     NSDate *secondTouchTime = [NSDate date];
     NSTimeInterval differnceBetweenTouch = [secondTouchTime timeIntervalSinceDate:firstTouchTime];
-    if(differnceBetweenTouch > .5 && isTabed){
+    if(differnceBetweenTouch > .9 && isTabed){
         avgTimeValue += [endTime timeIntervalSinceDate:startTime];
         avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue/totalClick];
         isTabed = NO;
         isGameEnded = YES;
        [self gameEndScreen:YES];
+        
     }
 }
 
@@ -372,11 +393,13 @@ AVAudioPlayer *clickPlayer;
     menuNode.zPosition = status?1:-10;
     replayNode.zPosition = status?1:-10;
     gameEndTxtNode.zPosition = status?1:-10;
+    LeaderBoard.zPosition = status?1:-10;
     
     gameEndBG.hidden = !status;
     menuNode.hidden  = !status;
     replayNode.hidden = !status;
     gameEndTxtNode.hidden = !status;
+    LeaderBoard.hidden = !status;
 }
 
 - (void) writeFile{
@@ -384,43 +407,6 @@ AVAudioPlayer *clickPlayer;
     [fileHandler writeFile:@"settings" fileContent:fileContent];
 }
 
--(UIColor *)reverseColorOf :(UIColor *)oldColor
-{
-    CGColorRef oldCGColor = oldColor.CGColor;
-    
-    int numberOfComponents = CGColorGetNumberOfComponents(oldCGColor);
-    // can not invert - the only component is the alpha
-    if (numberOfComponents == 1) {
-        return [UIColor colorWithCGColor:oldCGColor];
-    }
-    
-    const CGFloat *oldComponentColors = CGColorGetComponents(oldCGColor);
-    CGFloat newComponentColors[numberOfComponents];
-    
-    int i = numberOfComponents - 1;
-    newComponentColors[i] = oldComponentColors[i]; // alpha
-    while (--i >= 0) {
-        newComponentColors[i] = 1 - oldComponentColors[i];
-    }
-    
-    CGColorRef newCGColor = CGColorCreate(CGColorGetColorSpace(oldCGColor), newComponentColors);
-    UIColor *newColor = [UIColor colorWithCGColor:newCGColor];
-    CGColorRelease(newCGColor);
-    
-    //=====For the GRAY colors 'Middle level colors'
-    CGFloat white = 0;
-    [oldColor getWhite:&white alpha:nil];
-    
-    if(white>0.3 && white < 0.67)
-    {
-        if(white >= 0.5)
-            newColor = [UIColor darkGrayColor];
-        else if (white < 0.5)
-            newColor = [UIColor blackColor];
-        
-    }
-    return newColor;
-}
 
 - (void) findCountFromAll{
     

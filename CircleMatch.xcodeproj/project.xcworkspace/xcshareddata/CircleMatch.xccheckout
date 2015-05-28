@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>D7AD2E47-140C-4F1D-81DD-FF40074E028D</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>CircleMatch</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>C523FB79968F006F3B4CCFC8D7248CE25C9FA205</key>
 		<string>https://github.com/balagurubaran/CircleMatch.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>CircleMatch.xcodeproj/project.xcworkspace</string>
+	<string>CircleMatch.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>C523FB79968F006F3B4CCFC8D7248CE25C9FA205</key>
