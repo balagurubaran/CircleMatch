@@ -374,6 +374,7 @@ GameCenterClass *GCenter;
         isTabed = NO;
         isGameEnded = YES;
        [self gameEndScreen:YES];
+        [wrongClickPlayer play];
         
     }
 }

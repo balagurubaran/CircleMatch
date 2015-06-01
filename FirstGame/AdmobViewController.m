@@ -59,7 +59,6 @@
 }
 
 -(void)resetAdView:(UIViewController *)rootViewController {
-    return;
     
     // Always keep track of currentDelegate for notification forwarding
     currentDelegate_ = rootViewController;
@@ -80,7 +79,7 @@
         GADRequest *request = [GADRequest request];
         //if(isSimulator)
           //  request.testDevices = @[ @"a63718f0e45e515b7b906817e2142b92" ];
-        request.testDevices = @[ @"5bdeb2cb81dca47e93b2c567434d7f1b" ];
+       // request.testDevices = @[ @"5bdeb2cb81dca47e93b2c567434d7f1b" ];
         
         [bannerView_ loadRequest:request];
         isLoaded_ = NO;

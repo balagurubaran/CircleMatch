@@ -15,6 +15,7 @@
 		78AAB9CB1B0EC8F40038287A /* CircleMatchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */; };
 		78AAB9CC1B0EC8F40038287A /* CircleMatchBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */; };
 		78D4B9021B14B7EA0018F508 /* GameCenterClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D4B9011B14B7EA0018F508 /* GameCenterClass.m */; };
+		78E20E531B1C608D0002703C /* HelpScene.png in Resources */ = {isa = PBXBuildFile; fileRef = 78E20E521B1C608D0002703C /* HelpScene.png */; };
 		78EB25FB1B0ECA9D00CEFFB4 /* CreditScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 78EB25F81B0ECA9D00CEFFB4 /* CreditScene.sks */; };
 		78EB25FC1B0ECA9D00CEFFB4 /* CreditsScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 78EB25FA1B0ECA9D00CEFFB4 /* CreditsScene.m */; };
 		78EB25FE1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 78EB25FD1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png */; };
@@ -84,6 +85,7 @@
 		78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CircleMatchBG@2x.png"; sourceTree = "<group>"; };
 		78D4B9001B14B7EA0018F508 /* GameCenterClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterClass.h; sourceTree = "<group>"; };
 		78D4B9011B14B7EA0018F508 /* GameCenterClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCenterClass.m; sourceTree = "<group>"; };
+		78E20E521B1C608D0002703C /* HelpScene.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HelpScene.png; sourceTree = "<group>"; };
 		78EB25F81B0ECA9D00CEFFB4 /* CreditScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditScene.sks; sourceTree = "<group>"; };
 		78EB25F91B0ECA9D00CEFFB4 /* CreditsScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditsScene.h; sourceTree = "<group>"; };
 		78EB25FA1B0ECA9D00CEFFB4 /* CreditsScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditsScene.m; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 		78AAB9C81B0EC8F40038287A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				78E20E521B1C608D0002703C /* HelpScene.png */,
 				78EB25FD1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png */,
 				78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */,
 				78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */,
@@ -402,6 +405,7 @@
 				78EB25FE1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png in Resources */,
 				DD92C6041B0379550022F40A /* MenuScene.sks in Resources */,
 				788DEF821B12B89C0045FFBD /* click.mp3 in Resources */,
+				78E20E531B1C608D0002703C /* HelpScene.png in Resources */,
 				780664291B0D021D00E13B33 /* README.txt in Resources */,
 				F501056F1AE65E6900F73093 /* Main.storyboard in Resources */,
 			);

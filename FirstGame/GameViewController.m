@@ -89,14 +89,13 @@ SKView * skView;
 - (void)loadLeaderBoard{
     
     [[GKLocalPlayer localPlayer] loadDefaultLeaderboardIdentifierWithCompletionHandler:^(NSString *leaderboardIdentifier, NSError *error) {
-        NSLog(@"error:%@:",[error description]);
         if(error == nil){
             GKGameCenterViewController *gameCenterController = [[GKGameCenterViewController alloc] init];
             if (gameCenterController != nil)
             {
                 gameCenterController.gameCenterDelegate = self;
                 gameCenterController.viewState = GKGameCenterViewControllerStateLeaderboards;
-                gameCenterController.leaderboardIdentifier = @"leaderboardIdentifier";
+                gameCenterController.leaderboardIdentifier = @"bestscore_circlematch";
                 [self presentViewController: gameCenterController animated: YES completion:nil];
             }
         }

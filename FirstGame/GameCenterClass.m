@@ -65,7 +65,7 @@ GameCenterClass *gameCenterSharedInstance;
         NSArray *scores = @[scoreReporter];
         [GKScore reportScores:scores withCompletionHandler:^(NSError *error) {
             //Do something interesting here.
-            NSLog(@"post error:%@",error.localizedDescription);
+            NSLog(@"post error:%@",error.description);
         }];
     }
 }
