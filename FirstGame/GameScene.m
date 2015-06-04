@@ -185,7 +185,7 @@ GameCenterClass *GCenter;
     eachCircle.circleSpriteNode.userData = eachNodeUserData;
     
     [self addChild:eachCircle.circleSpriteNode];
-    // [self shake:1000 node:shapeSprite];
+    [self shake:1000 node:eachCircle.circleSpriteNode];
 }
 
 - (void) createCircle:(CGRect)circlePosition_size circleDetail:(CircleDetail*)cirDetail{
@@ -233,7 +233,7 @@ GameCenterClass *GCenter;
     
 }
 
-- (void) shake:(NSInteger)times node:(SKNode*)circleNode{
+- (void) shake:(NSInteger)times node:(SKShapeNode*)circleNode{
     CGPoint initialPosition = circleNode.position;
     NSInteger amplitudeX = 10;
     NSInteger amplitudeY = 1;
