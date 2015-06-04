@@ -12,6 +12,7 @@
 		780664291B0D021D00E13B33 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 780664271B0D021D00E13B33 /* README.txt */; };
 		7829A2C31B15BC9900222378 /* wrong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7829A2C21B15BC9900222378 /* wrong.wav */; };
 		788DEF821B12B89C0045FFBD /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 788DEF811B12B89C0045FFBD /* click.mp3 */; };
+		789B30DD1B1C9C7400E9A855 /* CircleMatch320.png in Resources */ = {isa = PBXBuildFile; fileRef = 789B30DC1B1C9C7400E9A855 /* CircleMatch320.png */; };
 		78AAB9CB1B0EC8F40038287A /* CircleMatchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */; };
 		78AAB9CC1B0EC8F40038287A /* CircleMatchBG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */; };
 		78D4B9021B14B7EA0018F508 /* GameCenterClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 78D4B9011B14B7EA0018F508 /* GameCenterClass.m */; };
@@ -81,6 +82,7 @@
 		780664271B0D021D00E13B33 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		7829A2C21B15BC9900222378 /* wrong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong.wav; sourceTree = "<group>"; };
 		788DEF811B12B89C0045FFBD /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
+		789B30DC1B1C9C7400E9A855 /* CircleMatch320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleMatch320.png; sourceTree = "<group>"; };
 		78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleMatchBG.png; sourceTree = "<group>"; };
 		78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CircleMatchBG@2x.png"; sourceTree = "<group>"; };
 		78D4B9001B14B7EA0018F508 /* GameCenterClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenterClass.h; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				78EB25FD1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png */,
 				78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */,
 				78AAB9CA1B0EC8F40038287A /* CircleMatchBG@2x.png */,
+				789B30DC1B1C9C7400E9A855 /* CircleMatch320.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				F50105711AE65E6900F73093 /* Images.xcassets in Resources */,
 				7829A2C31B15BC9900222378 /* wrong.wav in Resources */,
 				78EB25FB1B0ECA9D00CEFFB4 /* CreditScene.sks in Resources */,
+				789B30DD1B1C9C7400E9A855 /* CircleMatch320.png in Resources */,
 				F50105691AE65E6900F73093 /* GameScene.sks in Resources */,
 				78EB25FE1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png in Resources */,
 				DD92C6041B0379550022F40A /* MenuScene.sks in Resources */,
@@ -571,6 +575,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CircleMatch;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -590,6 +595,7 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CircleMatch;
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -23,7 +23,7 @@
     NSCharacterSet *separators = [NSCharacterSet whitespaceAndNewlineCharacterSet];
     NSArray *words = [labelText componentsSeparatedByCharactersInSet:separators];
     
-    int len = [labelText length];
+    int len = (int)[labelText length];
     int width = self.frame.size.width - 50; // specify your own width to fit the device screen
     
     // get the number of labelnode we need.
@@ -40,7 +40,7 @@
         while (lenPerLine<width) {
             if (cnt>[words count]-1) break; // failsafe - avoid overflow error
             lineStr = [NSString stringWithFormat:@"%@ %@", lineStr, words[cnt]];
-            lenPerLine = [lineStr length];
+            lenPerLine = (int)[lineStr length];
             cnt ++;
             // NSLog(@"%@", lineStr);
         }
