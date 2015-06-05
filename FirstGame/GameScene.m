@@ -193,7 +193,7 @@ GameCenterClass *GCenter;
     [cirDetail.circleSpriteNode removeFromParent];
     cirDetail.circleSpriteNode = [SKShapeNode node];
     cirDetail.circleSpriteNode.path = [UIBezierPath bezierPathWithOvalInRect:circlePosition_size].CGPath;
-    
+    cirDetail.circleSpriteNode.strokeColor = [UIColor clearColor];
     if(gameMode == BLACK_GREY_Mode){
         if(cirDetail.circleColor == GRAYCIRCLE)
             cirDetail.circleSpriteNode.fillColor = [UIColor grayColor];

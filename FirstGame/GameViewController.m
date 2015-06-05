@@ -17,7 +17,7 @@ GameScene *scene;
 MenuScene *menuScene;
 AdmobViewController *adsController;
 SKView * skView;
-
+SKTransition *transition;
 @implementation SKScene (Unarchive)
 
 + (instancetype)unarchiveFromFile:(NSString *)file {
@@ -76,14 +76,15 @@ SKView * skView;
     
     adsController = [AdmobViewController singleton];
     [adsController resetAdView:self];
+     transition = [SKTransition fadeWithColor:[UIColor grayColor] duration:1];
 }
 
 - (void) addGameScene{
-    [skView presentScene:scene];
+    [skView presentScene:scene transition:transition];
 }
 
 - (void) addMenuScene{
-    [skView presentScene:menuScene];
+    [skView presentScene:menuScene transition:transition];
 }
 
 - (void)loadLeaderBoard{

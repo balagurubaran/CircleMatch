@@ -16,7 +16,10 @@ SKSpriteNode *blackMode;
 SKSpriteNode *RGBMode;
 SKSpriteNode *vibgyorMode;
 SKSpriteNode *creditsScene;
+SKTransition *transition;
 
+CreditsScene *CS;
+HelpScene *help;
 @implementation SKScene (Unarchive)
 
 + (instancetype)unarchiveFromFile:(NSString *)file {
@@ -75,7 +78,13 @@ SKSpriteNode *creditsScene;
         avgTimeValue = 0.0;
         totalClick = 0;
     }
+    transition = [SKTransition fadeWithColor:[UIColor grayColor] duration:1];
     
+    CS = [CreditsScene unarchiveFromFile:@"CreditScene"];
+    CS.scaleMode = SKSceneScaleModeFill;
+    
+    help = [HelpScene unarchiveFromFile:@"HelpScene"];
+    help.scaleMode = SKSceneScaleModeFill;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -106,13 +115,9 @@ SKSpriteNode *creditsScene;
                 [alert show];
             }
         }else if([userData isEqualToString:@"credits"]){
-            CreditsScene *CS = [CreditsScene unarchiveFromFile:@"CreditScene"];
-            CS.scaleMode = SKSceneScaleModeFill;
-            [self.view presentScene:CS];
+            [self.view presentScene:CS transition:transition];
         }else if([userData isEqualToString:@"help"]){
-            HelpScene *help = [HelpScene unarchiveFromFile:@"HelpScene"];
-            help.scaleMode = SKSceneScaleModeFill;
-            [self.view presentScene:help];
+            [self.view presentScene:help transition:transition];
         }else if([userData isEqualToString:@"leaderboard"]){
             [[NSNotificationCenter defaultCenter] postNotificationName:@"loadLeaderBoard" object:nil];
         }

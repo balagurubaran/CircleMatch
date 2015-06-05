@@ -42,8 +42,6 @@
     GCenter.leaderBoardID = @"bestscore_circlematch";
     
     [GCenter checkAuthentication:^(BOOL gameCenterAvialble) {
-        if(gameCenterAvialble)
-            NSLog(@"Gamecenter Name:%@",[GCenter getUserName]);
     }];
 
 }
