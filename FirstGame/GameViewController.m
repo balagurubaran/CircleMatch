@@ -99,6 +99,9 @@ SKTransition *transition;
                 gameCenterController.leaderboardIdentifier = @"bestscore_circlematch";
                 [self presentViewController: gameCenterController animated: YES completion:nil];
             }
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Game Center Disabled"message:@"For Game Center make sure you have an account and you have a proper device connection."delegate:self cancelButtonTitle:@"Ok"otherButtonTitles:nil];
+            [alert show];
         }
     }];
 }
