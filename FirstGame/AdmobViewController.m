@@ -13,9 +13,9 @@
 //BOOL const isSimulator = NO;
 
 #ifdef TARGET_IPHONE_SIMULATOR
-    BOOL isSimulator = YES;
+BOOL isSimulator = YES;
 #else
-    BOOL isSimulator = NO;
+BOOL isSimulator = NO;
 #endif
 
 @interface AdmobViewController ()
@@ -40,6 +40,7 @@
     // Will only be run once, the first time this is called
     dispatch_once(&pred, ^{
         shared = [[AdmobViewController alloc] init];
+        
     });
     return shared;
 }
@@ -59,6 +60,7 @@
 }
 
 -(void)resetAdView:(UIViewController *)rootViewController {
+    return;
     // Always keep track of currentDelegate for notification forwarding
     currentDelegate_ = rootViewController;
     
@@ -77,13 +79,29 @@
     if(isLoaded_){
         GADRequest *request = [GADRequest request];
         //if(isSimulator)
-          //  request.testDevices = @[ @"a63718f0e45e515b7b906817e2142b92" ];
-       // request.testDevices = @[ @"5bdeb2cb81dca47e93b2c567434d7f1b" ];
+        //  request.testDevices = @[ @"a63718f0e45e515b7b906817e2142b92" ];
+        // request.testDevices = @[ @"5bdeb2cb81dca47e93b2c567434d7f1b" ];
         
         [bannerView_ loadRequest:request];
         isLoaded_ = NO;
     }
 }
+
+- (void) reLoadInterstitialAds{
+  //  return;
+    interstitial = [[GADInterstitial alloc] init];
+    interstitial.adUnitID = ADSID;
+    GADRequest *request = [GADRequest request];
+    [interstitial loadRequest:request];
+}
+
+- (void) LoadInterstitialAds:(UIViewController *)rootViewController{
+    
+    if (interstitial.isReady) {
+        [interstitial presentFromRootViewController:rootViewController];
+    }
+}
+
 
 - (void) removeADS{
     [bannerView_ removeFromSuperview ];

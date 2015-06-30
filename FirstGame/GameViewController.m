@@ -18,6 +18,8 @@ MenuScene *menuScene;
 AdmobViewController *adsController;
 SKView * skView;
 SKTransition *transition;
+int adsLoadcounter;
+
 @implementation SKScene (Unarchive)
 
 + (instancetype)unarchiveFromFile:(NSString *)file {
@@ -56,6 +58,7 @@ SKTransition *transition;
     menuScene = [MenuScene unarchiveFromFile:@"MenuScene"];
     
     menuScene.scaleMode = SKSceneScaleModeFill;
+    scene.scaleMode = SKSceneScaleModeFill;
     
     // Present the scene.
     [skView presentScene:menuScene];
@@ -76,15 +79,27 @@ SKTransition *transition;
     
     adsController = [AdmobViewController singleton];
     [adsController resetAdView:self];
-     transition = [SKTransition fadeWithColor:[UIColor grayColor] duration:1];
+     //transition = [SKTransition fadeWithColor:[UIColor grayColor] duration:1];
+    transition = [SKTransition revealWithDirection:SKTransitionDirectionRight duration:.5];
+    
 }
 
 - (void) addGameScene{
     [skView presentScene:scene transition:transition];
+
+    if(adsLoadcounter >= 5){
+        [adsController LoadInterstitialAds:self];
+        adsLoadcounter = 0;
+    }
 }
 
 - (void) addMenuScene{
+    
     [skView presentScene:menuScene transition:transition];
+    if(adsLoadcounter == 0){
+        [adsController reLoadInterstitialAds];
+    }
+    adsLoadcounter++;
 }
 
 - (void)loadLeaderBoard{

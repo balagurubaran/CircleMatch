@@ -38,6 +38,8 @@
 #define RGB_MODE         1
 #define VIBGYOR_MODE     2
 
+#define GAMECENTERSCORE @"Gamecenterscore"
+
 int gameMode;
 int maxColor;
 

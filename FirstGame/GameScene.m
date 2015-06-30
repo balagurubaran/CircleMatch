@@ -351,8 +351,14 @@ GameCenterClass *GCenter;
     }
     
     [self writeFile];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if(macthedCircleCount >= bestScore){
         [GCenter postScore:bestScore];
+    }else{
+        int gameCenterScore = [[defaults objectForKey:GAMECENTERSCORE] intValue];
+        if(gameCenterScore < bestScore){
+            [GCenter postScore:bestScore];
+        }
     }
     
     isSelectedNode = NO;

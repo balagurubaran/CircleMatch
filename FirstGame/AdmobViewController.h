@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GADBannerView.h"
+#import <GoogleMobileAds/GoogleMobileAds.h>
 
 @interface AdmobViewController : UIViewController{
     GADBannerView *bannerView_;
     BOOL didCloseWebsiteView_;
     BOOL isLoaded_;
     id currentDelegate_;
+    GADInterstitial *interstitial;
 }
 +(AdmobViewController *)singleton;
 -(void)resetAdView:(UIViewController *)rootViewController;
 - (void) removeADS;
+- (void) LoadInterstitialAds:(UIViewController *)rootViewController;
+- (void) reLoadInterstitialAds;
 @end

@@ -78,7 +78,7 @@ HelpScene *help;
         avgTimeValue = 0.0;
         totalClick = 0;
     }
-    transition = [SKTransition fadeWithColor:[UIColor grayColor] duration:1];
+    transition = [SKTransition revealWithDirection:SKTransitionDirectionRight duration:.5];
     
     CS = [CreditsScene unarchiveFromFile:@"CreditScene"];
     CS.scaleMode = SKSceneScaleModeFill;

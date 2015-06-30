@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 typedef void(^staus)(BOOL);
 
-@interface GameCenterClass : NSObject
+@interface GameCenterClass : NSObject{
+    NSUserDefaults *defaults;
+}
 +(id)gameCenterSharedInstance;
 
 @property(nonatomic,strong) NSString *leaderBoardID;
