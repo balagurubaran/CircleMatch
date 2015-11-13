@@ -44,10 +44,8 @@ SKLabelNode     *avgTimeLbl;
 
 int             totalCirlce;
 SKShapeNode *gameEndBG;
-SKLabelNode *menuNode;
-SKLabelNode *replayNode;
-SKLabelNode *gameEndTxtNode;
-SKLabelNode *LeaderBoard;
+
+
 
 BOOL        isTabed;
 
@@ -64,25 +62,12 @@ GameCenterClass *GCenter;
         [node.circleSpriteNode removeFromParent];
     }
     
-    totalCirlce = 36;
-    
-    fileHandler = [FileHandler fileHandlerSharedInstance];
-    utility = [utiliz utilizSharedInstance];
     /* Setup your scene here */
-    scoreLabel = (SKLabelNode*)[self childNodeWithName:@"score"];
-   
-    
-    
-    bestScoreLabel = (SKLabelNode*)[self childNodeWithName:@"bestScore"];
-    bestScoreLabel.text = [NSString stringWithFormat:@"%d",bestScore];
-    
-    backBtn = (SKSpriteNode*)[self childNodeWithName:@"backBtn"];
-    backBtn.userData = [NSMutableDictionary dictionaryWithObject:@"backBtn" forKey:@"userData"];
     
     isSelectedNode = NO;
     isGameEnded = NO;
     isTabed = NO;
-   
+    
     if(gameMode == BLACK_GREY_Mode){
         maxColor = 2;
     }else if(gameMode == RGB_MODE){
@@ -91,52 +76,71 @@ GameCenterClass *GCenter;
         maxColor = 7;
     }
     
-    allCirlceDetaiArray = [[NSMutableArray alloc] init];
-    gameStatusCheckTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(checkTheTimeInterVal) userInfo:nil repeats:YES];
     
-    currentTimeLbl = (SKLabelNode*)[self childNodeWithName:@"currentTimer"];
-    avgTimeLbl = (SKLabelNode*)[self childNodeWithName:@"avgTimer"];
-    
-    avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue/totalClick];
-    [allCirlceDetaiArray removeAllObjects];
-    
-    
-    gameEndBG = (SKShapeNode*)[self childNodeWithName:@"gameendbg"];
-
-    menuNode = (SKLabelNode*)[self childNodeWithName:@"menu"];
-    [menuNode setUserData:[NSMutableDictionary dictionaryWithObject:@"menu" forKey:@"userData"]];
-    replayNode = (SKLabelNode*)[self childNodeWithName:@"replay"];
-    [replayNode setUserData:[NSMutableDictionary dictionaryWithObject:@"replay" forKey:@"userData"]];
-    gameEndTxtNode = (SKLabelNode*)[self childNodeWithName:@"gameend"];
-    
-    LeaderBoard = (SKLabelNode*)[self childNodeWithName:@"leaderboard"];
-    [LeaderBoard setUserData:[NSMutableDictionary dictionaryWithObject:@"leaderboard" forKey:@"userData"]];
-    
-    selectedIdentifyNode = [SKShapeNode shapeNodeWithCircleOfRadius:20];
-    selectedIdentifyNode.fillColor = [UIColor blackColor];
-    //[self addChild:selectedIdentifyNode];
+    if(scoreLabel == NULL){
+        
+        totalCirlce = 36;
+        
+        fileHandler = [FileHandler fileHandlerSharedInstance];
+        utility = [utiliz utilizSharedInstance];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(resetTheGame)
+                                                     name:@"resetTheGame"
+                                                   object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(writeFile)
+                                                     name:@"writeFile"
+                                                   object:nil];
+        
+        scoreLabel = (SKLabelNode*)[self childNodeWithName:@"score"];
+        
+        bestScoreLabel = (SKLabelNode*)[self childNodeWithName:@"bestScore"];
+        bestScoreLabel.text = [NSString stringWithFormat:@"%d",bestScore];
+        
+        
+        backBtn = (SKSpriteNode*)[self childNodeWithName:@"backBtn"];
+        backBtn.userData = [NSMutableDictionary dictionaryWithObject:@"backBtn" forKey:@"userData"];
+        
+        
+        allCirlceDetaiArray = [[NSMutableArray alloc] init];
+        gameStatusCheckTimer = [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(checkTheTimeInterVal) userInfo:nil repeats:YES];
+        
+        currentTimeLbl = (SKLabelNode*)[self childNodeWithName:@"currentTimer"];
+        avgTimeLbl = (SKLabelNode*)[self childNodeWithName:@"avgTimer"];
+        
+        avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue/totalClick];
+        [allCirlceDetaiArray removeAllObjects];
+        
+        
+        gameEndBG = (SKShapeNode*)[self childNodeWithName:@"gameendbg"];
+        
+        
+        selectedIdentifyNode = [SKShapeNode shapeNodeWithCircleOfRadius:20];
+        selectedIdentifyNode.fillColor = [UIColor whiteColor];
+        //[self addChild:selectedIdentifyNode];
+        
+        NSURL *musicURL = [[NSBundle mainBundle] URLForResource:@"click" withExtension:@"mp3"];
+        clickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
+        [clickPlayer prepareToPlay];
+        
+        musicURL = [[NSBundle mainBundle] URLForResource:@"wrong" withExtension:@"wav"];
+        wrongClickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
+        [wrongClickPlayer prepareToPlay];
+        
+        GCenter = [GameCenterClass gameCenterSharedInstance];
+    }
     
     [self resetTheGame];
-    [self gameEndScreen:NO];
-    
-    NSURL *musicURL = [[NSBundle mainBundle] URLForResource:@"click" withExtension:@"mp3"];
-    clickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
-    [clickPlayer prepareToPlay];
-   
-    musicURL = [[NSBundle mainBundle] URLForResource:@"wrong" withExtension:@"wav"];
-    wrongClickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
-    [wrongClickPlayer prepareToPlay];
-    
-     GCenter = [GameCenterClass gameCenterSharedInstance];
 }
 
 - (void) generateCircle:(BOOL)initalLoad needToChangeValue:(NSArray*) circleIndex{
-
+    
     if(initalLoad){
         for(int i = 0;i < totalCirlce ; i++){
             CircleDetail *eachCircle;
             if([allCirlceDetaiArray count] <= totalCirlce-1)
-                 eachCircle = [[CircleDetail alloc] init];
+                eachCircle = [[CircleDetail alloc] init];
             else{
                 eachCircle = allCirlceDetaiArray[i];
             }
@@ -151,7 +155,7 @@ GameCenterClass *GCenter;
             CircleDetail *eachCircle = allCirlceDetaiArray[[[circleIndex objectAtIndex:i] integerValue]];
             [self randomCircle:eachCircle];
             
-           // [allCirlceDetaiArray replaceObjectAtIndex:[[circleIndex objectAtIndex:i] integerValue] withObject:eachCircle];
+            // [allCirlceDetaiArray replaceObjectAtIndex:[[circleIndex objectAtIndex:i] integerValue] withObject:eachCircle];
             [self updateCircleNodes:eachCircle];
         }
     }
@@ -170,12 +174,12 @@ GameCenterClass *GCenter;
 }
 
 - (void) updateCircleNodes:(CircleDetail*) eachCircle{
-  
+    
     int index = eachCircle.circleID;
     int sqrt = sqrtl(totalCirlce);
     int i = index/sqrt;
     int j = index%sqrt;
-   
+    
     CGPoint cirlcePosition = CGPointMake((i * 120) + 95, (j * 120 + 210));
     CGRect circleRect = CGRectMake(cirlcePosition.x - eachCircle.circleSize/2, cirlcePosition.y - eachCircle.circleSize/2, eachCircle.circleSize, eachCircle.circleSize);
     
@@ -229,7 +233,7 @@ GameCenterClass *GCenter;
         else if(cirDetail.circleColor == VIOLETCIRCLE)
             cirDetail.circleSpriteNode.fillColor = [utiliz colorFromHexString:VIOLETHEX];
     }
-   // cirDetail.circleSpriteNode.glowWidth = 1;
+    // cirDetail.circleSpriteNode.glowWidth = 1;
     
 }
 
@@ -248,7 +252,7 @@ GameCenterClass *GCenter;
     SKAction *rep = [SKAction sequence:randomActions];
     [circleNode runAction:rep completion:^{
         circleNode.position = initialPosition;
-    
+        
     }];
 }
 
@@ -273,7 +277,7 @@ GameCenterClass *GCenter;
             }
             
             if(!isSelectedNode){
-               // selectedIdentifyNode.hidden = YES;
+                // selectedIdentifyNode.hidden = YES;
                 [selectedIdentifyNode removeFromParent];
                 totalClick++;
                 if(selectedNodeCircle.circleID !=  previouslySelectedNodeCircle.circleID && selectedNodeCircle.circleColor ==  previouslySelectedNodeCircle.circleColor && selectedNodeCircle.circleSize ==  previouslySelectedNodeCircle.circleSize){
@@ -308,42 +312,26 @@ GameCenterClass *GCenter;
             firstTouchTime = [NSDate date];
             previouslySelectedNodeCircle = selectedNodeCircle;
             
-           
+            
             /*node.strokeColor = [self reverseColorOf:node.fillColor];//[SKColor purpleColor];
-            node.lineWidth = 3.0f;
-            node.glowWidth = 3.0f;
-            node.antialiased = YES;
+             node.lineWidth = 3.0f;
+             node.glowWidth = 3.0f;
+             node.antialiased = YES;
              */
-        }
-        else if(![selectedNodeCircle isKindOfClass:[CircleDetail class]]){
+        }else if(![selectedNodeCircle isKindOfClass:[CircleDetail class]]){
             NSDictionary *userDataDic = node.userData;
             NSString *userData = [userDataDic objectForKey:@"userData"];
             if([userData isEqualToString:@"backBtn"]){
-                                [self writeFile];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"addMenuScene" object:nil];
-
-            }
-            if([userData isEqualToString:@"menu"]){
                 [self writeFile];
-                [self resetTheGame];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"addMenuScene" object:nil];
-
+                
             }
-            if([userData isEqualToString:@"replay"]){
-                isGameEnded = NO;
-                [self gameEndScreen:NO];
-                [self resetTheGame];
-            }else if([userData isEqualToString:@"leaderboard"]){
-                [self resetTheGame];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"loadLeaderBoard" object:nil];
-            }
-
         }
     }
 }
 
 - (void) resetTheGame{
-    
+    isGameEnded = NO;
     if(gameMode == BLACK_GREY_Mode){
         blackAndGreyPlayCount++;
     }else if(gameMode == RGB_MODE){
@@ -369,17 +357,17 @@ GameCenterClass *GCenter;
     currentTimeLbl.text = @"0.0";
     [selectedIdentifyNode removeFromParent];
     
-   }
+}
 
 - (void) checkTheTimeInterVal{
     NSDate *secondTouchTime = [NSDate date];
     NSTimeInterval differnceBetweenTouch = [secondTouchTime timeIntervalSinceDate:firstTouchTime];
-    if(differnceBetweenTouch > .9 && isTabed){
+    if(differnceBetweenTouch > 1.2 && isTabed){
         avgTimeValue += [endTime timeIntervalSinceDate:startTime];
         avgTimeLbl.text = [NSString stringWithFormat:@"%.1f",avgTimeValue/totalClick];
         isTabed = NO;
         isGameEnded = YES;
-       [self gameEndScreen:YES];
+        [self gameEndScreen:YES];
         [wrongClickPlayer play];
         
     }
@@ -396,17 +384,21 @@ GameCenterClass *GCenter;
 }
 
 - (void) gameEndScreen:(BOOL)status{
-    gameEndBG.zPosition = status?1:-10;
-    menuNode.zPosition = status?1:-10;
-    replayNode.zPosition = status?1:-10;
-    gameEndTxtNode.zPosition = status?1:-10;
-    LeaderBoard.zPosition = status?1:-10;
-    
-    gameEndBG.hidden = !status;
-    menuNode.hidden  = !status;
-    replayNode.hidden = !status;
-    gameEndTxtNode.hidden = !status;
-    LeaderBoard.hidden = !status;
+    /* gameEndBG.zPosition = status?1:-10;
+     menuNode.zPosition = status?1:-10;
+     replayNode.zPosition = status?1:-10;
+     gameEndTxtNode.zPosition = status?1:-10;
+     LeaderBoard.zPosition = status?1:-10;
+     newBestNode.zPosition = status?1:-10;
+     
+     gameEndBG.hidden = !status;
+     menuNode.hidden  = !status;
+     replayNode.hidden = !status;
+     gameEndTxtNode.hidden = !status;
+     LeaderBoard.hidden = !status;
+     newBestNode.hidden = !status;
+     */
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameEndScene" object:nil];
 }
 
 - (void) writeFile{

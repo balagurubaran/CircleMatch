@@ -10,11 +10,13 @@
 #import "GameScene.h"
 #import "MenuScene.h"
 #import "AdmobViewController.h"
+#import "GameEndScene.h"
 #import "GameCenterClass.h"
 
 @import GameKit;
 GameScene *scene;
 MenuScene *menuScene;
+GameEndScene *gameEndScene;
 AdmobViewController *adsController;
 SKView * skView;
 SKTransition *transition;
@@ -56,6 +58,7 @@ int adsLoadcounter;
     scene = [GameScene unarchiveFromFile:@"GameScene"];
     
     menuScene = [MenuScene unarchiveFromFile:@"MenuScene"];
+    gameEndScene = [GameEndScene unarchiveFromFile:@"GameEndScene"];
     
     menuScene.scaleMode = SKSceneScaleModeFill;
     scene.scaleMode = SKSceneScaleModeFill;
@@ -77,6 +80,11 @@ int adsLoadcounter;
                                                  name:@"loadLeaderBoard"
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(addGameEndScene)
+                                                 name:@"addGameEndScene"
+                                               object:nil];
+    
     adsController = [AdmobViewController singleton];
     [adsController resetAdView:self];
      //transition = [SKTransition fadeWithColor:[UIColor grayColor] duration:1];
@@ -93,6 +101,9 @@ int adsLoadcounter;
     }
 }
 
+- (void) addGameEndScene{
+    [skView presentScene:gameEndScene transition:transition];
+}
 - (void) addMenuScene{
     
     [skView presentScene:menuScene transition:transition];

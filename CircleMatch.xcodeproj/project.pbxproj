@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		780664051B0D021300E13B33 /* AdmobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780664041B0D021300E13B33 /* AdmobViewController.m */; };
 		7829A2C31B15BC9900222378 /* wrong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7829A2C21B15BC9900222378 /* wrong.wav */; };
+		7842F5391BF56E5100D33A1B /* GameEndScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7842F5381BF56E5100D33A1B /* GameEndScene.sks */; };
+		7842F53C1BF56E6F00D33A1B /* GameEndScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 7842F53B1BF56E6F00D33A1B /* GameEndScene.m */; };
+		7842F53F1BF58DD900D33A1B /* help1.png in Resources */ = {isa = PBXBuildFile; fileRef = 7842F53D1BF58DD800D33A1B /* help1.png */; };
+		7842F5401BF58DD900D33A1B /* help2.png in Resources */ = {isa = PBXBuildFile; fileRef = 7842F53E1BF58DD900D33A1B /* help2.png */; };
 		788DEF821B12B89C0045FFBD /* click.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 788DEF811B12B89C0045FFBD /* click.mp3 */; };
 		789B30DD1B1C9C7400E9A855 /* CircleMatch320.png in Resources */ = {isa = PBXBuildFile; fileRef = 789B30DC1B1C9C7400E9A855 /* CircleMatch320.png */; };
 		78AAB9CB1B0EC8F40038287A /* CircleMatchBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */; };
@@ -51,6 +55,11 @@
 		780664031B0D021300E13B33 /* AdmobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdmobViewController.h; sourceTree = "<group>"; };
 		780664041B0D021300E13B33 /* AdmobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdmobViewController.m; sourceTree = "<group>"; };
 		7829A2C21B15BC9900222378 /* wrong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong.wav; sourceTree = "<group>"; };
+		7842F5381BF56E5100D33A1B /* GameEndScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameEndScene.sks; sourceTree = "<group>"; };
+		7842F53A1BF56E6F00D33A1B /* GameEndScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameEndScene.h; sourceTree = "<group>"; };
+		7842F53B1BF56E6F00D33A1B /* GameEndScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameEndScene.m; sourceTree = "<group>"; };
+		7842F53D1BF58DD800D33A1B /* help1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help1.png; sourceTree = "<group>"; };
+		7842F53E1BF58DD900D33A1B /* help2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help2.png; sourceTree = "<group>"; };
 		788DEF811B12B89C0045FFBD /* click.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click.mp3; sourceTree = "<group>"; };
 		789B30DC1B1C9C7400E9A855 /* CircleMatch320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleMatch320.png; sourceTree = "<group>"; };
 		78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CircleMatchBG.png; sourceTree = "<group>"; };
@@ -125,6 +134,8 @@
 		78AAB9C81B0EC8F40038287A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				7842F53D1BF58DD800D33A1B /* help1.png */,
+				7842F53E1BF58DD900D33A1B /* help2.png */,
 				78E20E521B1C608D0002703C /* HelpScene.png */,
 				78EB25FD1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png */,
 				78AAB9C91B0EC8F40038287A /* CircleMatchBG.png */,
@@ -166,6 +177,9 @@
 				DDA8B3231AEF5D8900466E05 /* FileHandler.m */,
 				F501058B1AE6685200F73093 /* CircleDetail.h */,
 				F501058C1AE6685200F73093 /* CircleDetail.m */,
+				7842F53A1BF56E6F00D33A1B /* GameEndScene.h */,
+				7842F53B1BF56E6F00D33A1B /* GameEndScene.m */,
+				7842F5381BF56E5100D33A1B /* GameEndScene.sks */,
 				F50105681AE65E6900F73093 /* GameScene.sks */,
 				DD92C6031B0379550022F40A /* MenuScene.sks */,
 				DD92C6051B0379710022F40A /* MenuScene.h */,
@@ -306,8 +320,11 @@
 				78AAB9CB1B0EC8F40038287A /* CircleMatchBG.png in Resources */,
 				F50105711AE65E6900F73093 /* Images.xcassets in Resources */,
 				7829A2C31B15BC9900222378 /* wrong.wav in Resources */,
+				7842F5401BF58DD900D33A1B /* help2.png in Resources */,
+				7842F53F1BF58DD900D33A1B /* help1.png in Resources */,
 				78EB25FB1B0ECA9D00CEFFB4 /* CreditScene.sks in Resources */,
 				789B30DD1B1C9C7400E9A855 /* CircleMatch320.png in Resources */,
+				7842F5391BF56E5100D33A1B /* GameEndScene.sks in Resources */,
 				F50105691AE65E6900F73093 /* GameScene.sks in Resources */,
 				78EB25FE1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png in Resources */,
 				DD92C6041B0379550022F40A /* MenuScene.sks in Resources */,
@@ -343,6 +360,7 @@
 				78D4B9021B14B7EA0018F508 /* GameCenterClass.m in Sources */,
 				F50105611AE65E6900F73093 /* main.m in Sources */,
 				78EB26031B0ECE5600CEFFB4 /* HelpScene.m in Sources */,
+				7842F53C1BF56E6F00D33A1B /* GameEndScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,6 +486,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FirstGame",
@@ -475,10 +494,7 @@
 				INFOPLIST_FILE = FirstGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FirstGame/GoogleMobileAdsSdkiOS-6.12.2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CircleMatch;
 				PROVISIONING_PROFILE = "";
@@ -492,6 +508,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FirstGame",
@@ -499,10 +516,7 @@
 				INFOPLIST_FILE = FirstGame/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FirstGame/GoogleMobileAdsSdkiOS-6.12.2",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CircleMatch;
 				PROVISIONING_PROFILE = "";

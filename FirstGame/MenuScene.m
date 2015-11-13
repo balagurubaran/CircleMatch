@@ -17,7 +17,8 @@ SKSpriteNode *RGBMode;
 SKSpriteNode *vibgyorMode;
 SKSpriteNode *creditsScene;
 SKTransition *transition;
-
+NSString *storedData;
+FileHandler *fileHandler;
 CreditsScene *CS;
 HelpScene *help;
 @implementation SKScene (Unarchive)
@@ -42,28 +43,37 @@ HelpScene *help;
 @implementation MenuScene
 
 -(void)didMoveToView:(SKView *)view {
-    blackMode = (SKSpriteNode*)[self childNodeWithName:@"black"];
-    blackMode.userData = [NSMutableDictionary dictionaryWithObject:@"blackmode" forKey:@"userData"];
-    
-    RGBMode = (SKSpriteNode*)[self childNodeWithName:@"rgb"];
-    RGBMode.userData = [NSMutableDictionary dictionaryWithObject:@"RGBMode" forKey:@"userData"];
-    
-    vibgyorMode = (SKSpriteNode*)[self childNodeWithName:@"vibgyor"];
-    vibgyorMode.userData = [NSMutableDictionary dictionaryWithObject:@"VIBGYORMode" forKey:@"userData"];
- 
-    creditsScene = (SKSpriteNode*)[self childNodeWithName:@"credits"];
-    creditsScene.userData = [NSMutableDictionary dictionaryWithObject:@"credits" forKey:@"userData"];
-    
-    SKSpriteNode *helpScene = (SKSpriteNode*)[self childNodeWithName:@"help"];
-    helpScene.userData = [NSMutableDictionary dictionaryWithObject:@"help" forKey:@"userData"];
-    
-    SKSpriteNode *leadeBoardScene = (SKSpriteNode*)[self childNodeWithName:@"leaderboard"];
-    leadeBoardScene.userData = [NSMutableDictionary dictionaryWithObject:@"leaderboard" forKey:@"userData"];
-    
-    FileHandler *fileHandler = [FileHandler fileHandlerSharedInstance];
-    NSString *storedData = [fileHandler readFile:@"settings"];
-    
-    
+    if(blackMode == NULL){
+        blackMode = (SKSpriteNode*)[self childNodeWithName:@"black"];
+        blackMode.userData = [NSMutableDictionary dictionaryWithObject:@"blackmode" forKey:@"userData"];
+        
+        RGBMode = (SKSpriteNode*)[self childNodeWithName:@"rgb"];
+        RGBMode.userData = [NSMutableDictionary dictionaryWithObject:@"RGBMode" forKey:@"userData"];
+        
+        vibgyorMode = (SKSpriteNode*)[self childNodeWithName:@"vibgyor"];
+        vibgyorMode.userData = [NSMutableDictionary dictionaryWithObject:@"VIBGYORMode" forKey:@"userData"];
+        
+        creditsScene = (SKSpriteNode*)[self childNodeWithName:@"credits"];
+        creditsScene.userData = [NSMutableDictionary dictionaryWithObject:@"credits" forKey:@"userData"];
+        
+        SKSpriteNode *helpScene = (SKSpriteNode*)[self childNodeWithName:@"help"];
+        helpScene.userData = [NSMutableDictionary dictionaryWithObject:@"help" forKey:@"userData"];
+        
+        SKSpriteNode *leadeBoardScene = (SKSpriteNode*)[self childNodeWithName:@"leaderboard"];
+        leadeBoardScene.userData = [NSMutableDictionary dictionaryWithObject:@"leaderboard" forKey:@"userData"];
+        
+        fileHandler = [FileHandler fileHandlerSharedInstance];
+        
+        
+        transition = [SKTransition revealWithDirection:SKTransitionDirectionRight duration:.5];
+        
+        CS = [CreditsScene unarchiveFromFile:@"CreditScene"];
+        CS.scaleMode = SKSceneScaleModeFill;
+        
+        help = [HelpScene unarchiveFromFile:@"HelpScene"];
+        help.scaleMode = SKSceneScaleModeFill;
+    }
+    storedData = [fileHandler readFile:@"settings"];
     if ([storedData length] > 0) {
         NSArray  *storedDataAray = [storedData componentsSeparatedByString:@","];
         bestScore = [[storedDataAray objectAtIndex:0] intValue];
@@ -78,13 +88,6 @@ HelpScene *help;
         avgTimeValue = 0.0;
         totalClick = 0;
     }
-    transition = [SKTransition revealWithDirection:SKTransitionDirectionRight duration:.5];
-    
-    CS = [CreditsScene unarchiveFromFile:@"CreditScene"];
-    CS.scaleMode = SKSceneScaleModeFill;
-    
-    help = [HelpScene unarchiveFromFile:@"HelpScene"];
-    help.scaleMode = SKSceneScaleModeFill;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -121,7 +124,7 @@ HelpScene *help;
         }else if([userData isEqualToString:@"leaderboard"]){
             [[NSNotificationCenter defaultCenter] postNotificationName:@"loadLeaderBoard" object:nil];
         }
- 
+        
     }
 }
 
