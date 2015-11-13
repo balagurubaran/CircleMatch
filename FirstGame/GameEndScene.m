@@ -30,6 +30,7 @@ SKLabelNode *menuNode;
         [LeaderBoard setUserData:[NSMutableDictionary dictionaryWithObject:@"leaderboard" forKey:@"userData"]];
         newBestNode = (SKLabelNode*)[self childNodeWithName:@"newbest"];
         newBestNode.text = [NSString stringWithFormat:@"Best Score: %d",bestScore];
+        newBestNode.hidden = YES;
         
     }
     
