@@ -24,7 +24,6 @@ CircleDetail    *previouslySelectedNodeCircle;
 BOOL            isGameEnded;
 NSDate          *firstTouchTime;
 NSTimer         *gameStatusCheckTimer;
-int             macthedCircleCount;
 SKLabelNode     *scoreLabel;
 SKLabelNode     *bestScoreLabel;
 
@@ -43,7 +42,7 @@ SKLabelNode     *currentTimeLbl;
 SKLabelNode     *avgTimeLbl;
 
 int             totalCirlce;
-SKShapeNode *gameEndBG;
+SKShapeNode     *gameEndBG;
 
 
 
@@ -340,13 +339,11 @@ GameCenterClass *GCenter;
     
     [self writeFile];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if(macthedCircleCount >= bestScore){
-        [GCenter postScore:bestScore];
-    }else{
-        int gameCenterScore = [[defaults objectForKey:GAMECENTERSCORE] intValue];
-        if(gameCenterScore < bestScore){
-            [GCenter postScore:bestScore];
-        }
+    [GCenter postScore:macthedCircleCount];
+    
+    int gameCenterScore = [[defaults objectForKey:GAMECENTERSCORE] intValue];
+    if(gameCenterScore > macthedCircleCount){
+        [GCenter postScore:gameCenterScore];
     }
     
     isSelectedNode = NO;
@@ -398,6 +395,7 @@ GameCenterClass *GCenter;
      LeaderBoard.hidden = !status;
      newBestNode.hidden = !status;
      */
+    [self writeFile];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"addGameEndScene" object:nil];
 }
 

@@ -43,14 +43,14 @@
 int gameMode;
 int maxColor;
 
-int
-bestScore;
+int         bestScore;
+int         macthedCircleCount;
 int         blackAndGreyPlayCount;
 int         RGBPlayCount;
 
 
-int     totalClick;
-NSTimeInterval   avgTimeValue;
-NSTimeInterval   currentTimeValue;
+int                 totalClick;
+NSTimeInterval      avgTimeValue;
+NSTimeInterval      currentTimeValue;
 
 #endif

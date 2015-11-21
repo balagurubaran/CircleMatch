@@ -14,7 +14,9 @@ SKLabelNode *replayNode;
 SKLabelNode *gameEndTxtNode;
 SKLabelNode *LeaderBoard;
 SKLabelNode *newBestNode;
+SKLabelNode *scoreNode;
 SKLabelNode *menuNode;
+SKLabelNode *info;
 
 -(void)didMoveToView:(SKView *)view {
     if(replayNode == NULL){
@@ -28,17 +30,22 @@ SKLabelNode *menuNode;
         
         LeaderBoard = (SKLabelNode*)[self childNodeWithName:@"leaderboard"];
         [LeaderBoard setUserData:[NSMutableDictionary dictionaryWithObject:@"leaderboard" forKey:@"userData"]];
-        newBestNode = (SKLabelNode*)[self childNodeWithName:@"newbest"];
-        newBestNode.text = [NSString stringWithFormat:@"Best Score: %d",bestScore];
-        newBestNode.hidden = YES;
+        
+        newBestNode = (SKLabelNode*)[self childNodeWithName:@"newbest"];        
+        scoreNode   = (SKLabelNode*)[self childNodeWithName:@"currentscore"];
+        info        = (SKLabelNode*)[self childNodeWithName:@"Info"];
         
     }
+
+    newBestNode.text = [NSString stringWithFormat:@"Best Score: %d",bestScore];
+    scoreNode.text = [NSString stringWithFormat:@"Score : %d",macthedCircleCount];
     
-   /* if(macthedCircleCount >= bestScore){
-        
-        newBestNode.text = [NSString stringWithFormat:@"New Best Score: %d",bestScore];
+    info.text = @"Don't give up try hard to beat your own best";
+    if(bestScore <= macthedCircleCount){
+        info.text = @"Congratulations! New high score";
+    } else if(bestScore - 10 < macthedCircleCount){
+        info.text = @"OOPS! You are very close to your best score! Don't give up ";
     }
-    */
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
