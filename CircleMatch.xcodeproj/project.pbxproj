@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		142C73871DEE829A00AA5AA6 /* CircleMatchHelp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 142C73861DEE829A00AA5AA6 /* CircleMatchHelp.mp3 */; };
 		780664051B0D021300E13B33 /* AdmobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 780664041B0D021300E13B33 /* AdmobViewController.m */; };
 		7829A2C31B15BC9900222378 /* wrong.wav in Resources */ = {isa = PBXBuildFile; fileRef = 7829A2C21B15BC9900222378 /* wrong.wav */; };
 		7842F5391BF56E5100D33A1B /* GameEndScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 7842F5381BF56E5100D33A1B /* GameEndScene.sks */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		142C73861DEE829A00AA5AA6 /* CircleMatchHelp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = CircleMatchHelp.mp3; sourceTree = "<group>"; };
 		780664031B0D021300E13B33 /* AdmobViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdmobViewController.h; sourceTree = "<group>"; };
 		780664041B0D021300E13B33 /* AdmobViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdmobViewController.m; sourceTree = "<group>"; };
 		7829A2C21B15BC9900222378 /* wrong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = wrong.wav; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		788DEF801B12B89C0045FFBD /* Sound */ = {
 			isa = PBXGroup;
 			children = (
+				142C73861DEE829A00AA5AA6 /* CircleMatchHelp.mp3 */,
 				7829A2C21B15BC9900222378 /* wrong.wav */,
 				788DEF811B12B89C0045FFBD /* click.mp3 */,
 			);
@@ -325,6 +328,7 @@
 				78EB25FB1B0ECA9D00CEFFB4 /* CreditScene.sks in Resources */,
 				789B30DD1B1C9C7400E9A855 /* CircleMatch320.png in Resources */,
 				7842F5391BF56E5100D33A1B /* GameEndScene.sks in Resources */,
+				142C73871DEE829A00AA5AA6 /* CircleMatchHelp.mp3 in Resources */,
 				F50105691AE65E6900F73093 /* GameScene.sks in Resources */,
 				78EB25FE1B0ECBB400CEFFB4 /* CircleMatch_emptyBG.png in Resources */,
 				DD92C6041B0379550022F40A /* MenuScene.sks in Resources */,

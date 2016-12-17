@@ -50,6 +50,7 @@ BOOL        isTabed;
 
 AVAudioPlayer *clickPlayer;
 AVAudioPlayer *wrongClickPlayer;
+AVAudioPlayer *helpPlayer;
 GameCenterClass *GCenter;
 
 @implementation GameScene
@@ -77,6 +78,11 @@ GameCenterClass *GCenter;
     
     
     if(scoreLabel == NULL){
+        
+        NSURL *musicURL = [[NSBundle mainBundle] URLForResource:@"CircleMatchHelp" withExtension:@"mp3"];
+        helpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
+        [helpPlayer prepareToPlay];
+
         
         totalCirlce = 36;
         
@@ -119,7 +125,7 @@ GameCenterClass *GCenter;
         selectedIdentifyNode.fillColor = [UIColor whiteColor];
         //[self addChild:selectedIdentifyNode];
         
-        NSURL *musicURL = [[NSBundle mainBundle] URLForResource:@"click" withExtension:@"mp3"];
+        musicURL = [[NSBundle mainBundle] URLForResource:@"click" withExtension:@"mp3"];
         clickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
         [clickPlayer prepareToPlay];
         
@@ -127,7 +133,11 @@ GameCenterClass *GCenter;
         wrongClickPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
         [wrongClickPlayer prepareToPlay];
         
+        
+        
         GCenter = [GameCenterClass gameCenterSharedInstance];
+        
+        [helpPlayer play];
     }
     
     [self resetTheGame];

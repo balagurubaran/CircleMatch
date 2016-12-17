@@ -8,6 +8,9 @@
 
 #import "HelpScene.h"
 #import "Constant.h"
+#import <Foundation/Foundation.h>
+
+@import AVFoundation;
 SKSpriteNode *bgNode;
 @implementation HelpScene
 
@@ -26,6 +29,10 @@ SKSpriteNode *bgNode;
     nextNode.hidden = YES;
     backNode.hidden = YES;
    */
+    
+    NSURL *musicURL = [[NSBundle mainBundle] URLForResource:@"CircleMatchHelp" withExtension:@"mp3"];
+    AVAudioPlayer *helpPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:musicURL error:nil];
+    [helpPlayer prepareToPlay];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
